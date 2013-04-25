@@ -1,6 +1,11 @@
-This branch is for Developpement. If you use it, don't forget to :
-	1. Change the value of installFolder in visualscience.js
-	2. "Clear all caches" in Drupal.
+This branch of VisualScience is one that is working. It has the old Backend of Vahan, and the last UI of Sébastien, before the start of a new backend.
+Features:
++ Ajax Autocomplete
++ Message, CSV and LS fully working.
++ Save/Load Search
++ UI of Conference Tab
+
+
 # VisualScience
 
 A module providing an easy-to-use intuitive search interface for your Drupal Database. With just a single search box and advanced autocomplete you can get the targeted list of entities (users or nodes) within several seconds. You can also save your searches to have quick access to commonly used lists. **No configuration needed!**
