@@ -1,4 +1,21 @@
-Branch to develop the new backend, but this time with NDDB instead of an array.
+This branch was an attempt of fastening the insertion of a lot of content with Firefox, so that it doesn't slow down when doing a search with a lot of users. We used the following technique:
+Site: http://blog.stevenlevithan.com/archives/faster-than-innerhtml
+Benchmark site: http://stevenlevithan.com/demo/replaceHtml.html
+Our benchmarks: 
+With about 10'000 users:
+In Chrome with the optimization, it takes approximately 340 ms, whereas without it takes 1100ms.
+In Firefox however the impact is not as big as expected. With: 830 ms, and without: 1000ms. 
+
+Some strange things are: Considering no optimization at all, Firefox does the job faster than Chrome, however Chrome doesn't bug, whereas Firefox does. (The window is shaded) one possible reason of this, is that probably Firefox reconsiders every implication when inserting the html at once, and may be Chrome does it in many steps, which gives better preformances.
+
+The plan is now to insert the users by hundreds, in order to completely avoid those bugging behaviours, and still have a dynamic user experience.
+
+Files to Check: 
+* utils.js: insertFastHTML
+* interface.js: line 197
+
+
+
 # VisualScience
 
 A module providing an easy-to-use intuitive search interface for your Drupal Database. With just a single search box and advanced autocomplete you can get the targeted list of entities (users or nodes) within several seconds. You can also save your searches to have quick access to commonly used lists. **No configuration needed!**
