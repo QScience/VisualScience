@@ -3,10 +3,12 @@
  * @file
  * Configuration class for VisualScience module
  */
+
 class Config {
   /**
-   * Initialisation procedure.
-   * Only adds the needed JS
+   * Initialisation procedure. 
+   * 
+   * Only adds the needed JS.
    */
   function __construct() {
     drupal_add_js(drupal_get_path('module', 'visualscience') . '/javascript/visualscience.config.js');

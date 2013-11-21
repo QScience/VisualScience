@@ -3,6 +3,7 @@
  * @file
  * Receives a string through GET request and outputs a CSV file out if it.
  */
+
 header('Content-type: text/csv');
 header('Content-Disposition: attachement;filename=livingscience_' . time() . '.csv');
 $new_line_character = urldecode($_GET['char']);
