@@ -62,6 +62,6 @@ function visualscience_get_all_fields() {
  * @param $needle
  * @param $haystack
  */
-function in_arrayi($needle, $haystack) {
+function visualscience_in_arrayi($needle, $haystack) {
   return in_array(strtolower($needle), array_map('strtolower', $haystack));
 }
