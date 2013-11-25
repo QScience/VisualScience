@@ -3,7 +3,7 @@
  * @file(visualscience.upload.class.php)
  * Provides everything needed for hendling upload and giving back files to users.
  */
-class Upload {
+class VisualScienceUpload {
 
   /**
    * Creates the form to upload files to the server.

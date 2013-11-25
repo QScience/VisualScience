@@ -22,7 +22,7 @@ define('VISUALSCIENCE_NUSER_LOADED', 1000);
 
 /**
  * Implements hook_menu.
- * @return array Arraay of all possible urls for VisualScience module
+ * @return array Array of all possible urls for VisualScience module
  */
 function visualscience_menu() {
 
@@ -86,7 +86,7 @@ function visualscience_menu() {
  * @return string             HTML with form to be printed
  */
 function visualscience_upload_form($form, &$form_state) {
-  $upload = new Upload;
+  $upload = new VisualScienceUpload;
   return $upload->visualscience_upload_form($form, $form_state);
 }
 
@@ -95,7 +95,7 @@ function visualscience_upload_form($form, &$form_state) {
  * @return file if denied a webpage else the requested file
  */
 function visualscience_get_file_with_id() {
-  $upload = new Upload;
+  $upload = new VisualScienceUpload;
   return $upload->visualscience_get_file_with_id();
 }
 
@@ -115,7 +115,7 @@ function visualscience_send_message() {
  * @return string             Notification if success or error and informations about it
  */
 function visualscience_upload_submit($form, &$form_state) {
-  $upload = new Upload;
+  $upload = new VisualScienceUpload;
   return $upload->visualscience_upload_submit($form, $form_state);
 }
 

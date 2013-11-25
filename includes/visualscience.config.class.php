@@ -165,7 +165,6 @@ class Config {
    * @return array array of the fields
    */
   private function getListOfFields() {
-    $listFields = array();
     $userFields = user_load(0);
     return array_keys(get_object_vars($userFields));
   }
