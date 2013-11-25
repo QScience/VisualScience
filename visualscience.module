@@ -22,9 +22,6 @@ define('VISUALSCIENCE_NUSER_LOADED', 1000);
 
 /**
  * Implements hook_menu().
- * 
- * @return array 
- *   Array of all possible urls for VisualScience module.
  */
 function visualscience_menu() {
 
@@ -192,12 +189,6 @@ function visualscience_users() {
  * 
  * When using the CSS selector jQuery UI suggests,
  * we don't have the expected performance(Really slow with > 10'000 checkboxes).
- * 
- * @param array $css 
- *   Drupal's array of CSS.
- * 
- * @return none      
- *   We just modify the link of a file, don't return anything.
  */
 function visualscience_css_alter(&$css) {
   if (isset($css['misc/ui/jquery.ui.theme.css'])) {
