@@ -164,7 +164,7 @@ class VisualscienceSearch {
   /**
    * Returns the ui dof every user in db.
    * 
-   * @return array a
+   * @return array
    *   Array of all uids.
    */
   protected function getAllUsersIds() {
@@ -320,9 +320,9 @@ class VisualscienceSearch {
   /**
    * Gets every informations needed for the client-side DB, called through ajax.
    * 
-   * @param integer $from    
+   * @param int $from    
    *   From which user to load the configurations
-   * @param integer $how_many 
+   * @param int $how_many 
    *   How many users to load from $from
    * 
    * @return string           
@@ -339,7 +339,7 @@ class VisualscienceSearch {
       $show_messages_button = variable_get('visualscience_show_messages_button');
       $show_csv_button = variable_get('visualscience_show_csv_button');
       $show_living_science_button = variable_get('visualscience_show_livingscience_button');
-      // $show_conference_button 
+      // $show_conference_button.
       // = variable_get('visualscience_show_conference_button');.
       $show_conference_button = 0;
     }
