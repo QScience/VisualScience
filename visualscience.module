@@ -86,7 +86,7 @@ function visualscience_menu() {
  * @return string             HTML with form to be printed
  */
 function visualscience_upload_form($form, &$form_state) {
-  $upload = new VisualScienceUpload;
+  $upload = new visualscienceUpload;
   return $upload->visualscience_upload_form($form, $form_state);
 }
 
@@ -95,7 +95,7 @@ function visualscience_upload_form($form, &$form_state) {
  * @return file if denied a webpage else the requested file
  */
 function visualscience_get_file_with_id() {
-  $upload = new VisualScienceUpload;
+  $upload = new visualscienceUpload;
   return $upload->visualscience_get_file_with_id();
 }
 
@@ -104,7 +104,7 @@ function visualscience_get_file_with_id() {
  * @return string notification if success or error
  */
 function visualscience_send_message() {
-  $message = new Message;
+  $message = new visualscienceMessage;
   return $message->visualscience_send_message();
 }
 
@@ -115,7 +115,7 @@ function visualscience_send_message() {
  * @return string             Notification if success or error and informations about it
  */
 function visualscience_upload_submit($form, &$form_state) {
-  $upload = new VisualScienceUpload;
+  $upload = new visualscienceUpload;
   return $upload->visualscience_upload_submit($form, $form_state);
 }
 
@@ -125,7 +125,7 @@ function visualscience_upload_submit($form, &$form_state) {
  * @return string         The webpage to be printed
  */
 function visualscience_page($clear = TRUE) {
-  $search = new Search;
+  $search = new visualscienceSearch;
   $search_to_perform = $search->getSavedSearch();
   $search->getClientSideFiles();
   $search_bar = $search->getHtmlSearchBar($search_to_perform);
@@ -140,7 +140,7 @@ function visualscience_page($clear = TRUE) {
  * @return string         The page to be displayed
  */
 function visualscience_config_page($clear = TRUE) {
-  $config = new Config;
+  $config = new visualscienceConfig;
   $output = '';
   if (isset($_POST['visualscience_config_form']) && $_POST['visualscience_config_csrf_token'] == $_COOKIE['csrfTokenValue']) {
     $config->saveSentValues();
@@ -155,7 +155,7 @@ function visualscience_config_page($clear = TRUE) {
  * @return json the list of users with some additional informations
  */
 function visualscience_users() {
-  $search = new Search;
+  $search = new visualscienceSearch;
   $from = intval($_GET['userId']);
   $database = $search->getUsersEntries($from, variable_get('visualscience_user_sent_per_ajax_request', 1000));
   echo $database;

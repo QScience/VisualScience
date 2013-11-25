@@ -3,7 +3,7 @@
  * @file(visualscience.searchtable.class.php)
  * File to generate and handle search and user related queries
  */
-class Search {
+class visualscienceSearch {
   /**
    * Makes the search string safe for PHP
    * @param  string $search the search string

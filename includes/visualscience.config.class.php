@@ -4,7 +4,7 @@
  * Configuration class for VisualScience module
  */
 
-class Config {
+class visualscienceConfig {
   /**
    * Initialisation procedure.
    *

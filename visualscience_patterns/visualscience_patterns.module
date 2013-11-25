@@ -46,7 +46,7 @@ function visualscience_patterns($data = NULL)  {
  * @return page         page showing wether the current data passed the test or not
  */
 function visualscience_patterns_validate($action, $tag, &$data) {
-  $config = new Config;
+  $config = new visualscienceConfig;
   $field = $data;
   $uncomplete_field = $config->checkCompletefield($field);
   $result = array();
@@ -157,7 +157,7 @@ function visualscience_patterns_validate($action, $tag, &$data) {
  * @return none             nothing returned
  */
 function visualscience_insert_config($form_id, $form_state) {
-  $config = new Config;
+  $config = new visualscienceConfig;
   $field = $form_state['values'];
   if ($field['name'] == 'nbUsersPerPage') {
     $config->updateNbUsersPerPage($field['value']);
@@ -177,7 +177,7 @@ function visualscience_insert_config($form_id, $form_state) {
  * @return none             nothing returned
  */
 function visualscience_modify_config($form_id, $form_state) {
-  $config = new Config;
+  $config = new visualscienceConfig;
   $field = $form_state['values'];
   $config->modifyPatternConfig($field);
 }
@@ -189,7 +189,7 @@ function visualscience_modify_config($form_id, $form_state) {
  * @return none             nothing returned
  */
 function visualscience_insert_config_numbers($form_id, $form_state) {
-  $config = new Config;
+  $config = new visualscienceConfig;
   $field = $form_state['values'];
   if ($field['name'] == 'nbUsersPerPage') {
     $config->updateNbUsersPerPage($field['value']);
@@ -206,7 +206,7 @@ function visualscience_insert_config_numbers($form_id, $form_state) {
  * @return none             nothing returned
  */
 function visualscience_modify_config_numbers($form_id, $form_state) {
-  $config = new Config;
+  $config = new visualscienceConfig;
   $field = $form_state['values'];
   if ($field['name'] == 'nbUsersPerPage') {
     $config->updateNbUsersPerPage($field['value']);
@@ -274,7 +274,7 @@ function visualscience_export_config($args = NULL, &$result = NULL) {
     $action_type = PATTERNS_CREATE;
   }
 
-  $search = new Search;
+  $search = new visualscienceSearch;
   $fields =  $search->getPatternConfiguration();
   foreach ($fields as $field) {
     $action = array($action_type => array(

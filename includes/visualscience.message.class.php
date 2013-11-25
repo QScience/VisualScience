@@ -3,7 +3,7 @@
  * @file(visualscience.message.class.php)
  * The class that manages the backend to send a mail through the Drupal instance.
  */
-class Message {
+class visualscienceMessage {
 
 /**
  * Allows the sending of a mail through this Drupal instance
