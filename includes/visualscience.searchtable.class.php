@@ -8,7 +8,7 @@ class VisualscienceSearch {
   /**
    * Makes the search string safe for PHP.
    * 
-   * @param  string $search
+   * @param string $search
    *   The search string.
    *   
    * @return string
@@ -27,10 +27,10 @@ class VisualscienceSearch {
    */
   protected function getFieldsFromConfig() {
     $query = db_select('visualscience_search_config', 'f')
-    ->fields('f', array('name', 'mini', 'full', 'first', 'last', ));
+    ->fields('f', array('name', 'mini', 'full', 'first', 'last'));
     $result = $query->execute();
     $final = array();
-    for ($i=0; $record = $result->fetchAssoc(); $i++) {
+    for ($i = 0; $record = $result->fetchAssoc(); $i++) {
       $final[$record['name']] = $record;
     }
     return $final;
@@ -76,16 +76,16 @@ class VisualscienceSearch {
    * Gets the fields'values for a range of users.
    * 
    * @param array  $fields 
-   *  The fields asked for.
-   * @param integer $from   
+   *   The fields asked for.
+   * @param int $from   
    *   Start index of users to get.
-   * @param integer $to     
+   * @param int $to     
    *   End index of users to get.
    * 
    * @return array
    *   The array of fields for queried users.
    */
-  protected function getUsersFields($fields, $from=0, $to=0) {
+  protected function getUsersFields($fields, $from = 0, $to = 0) {
     if ($to != 0) {
       $users_ids = array();
       while ($from <= $to) {
@@ -99,7 +99,8 @@ class VisualscienceSearch {
     $users = user_load_multiple($users_ids);
     $user_fields = array();
     foreach ($users as $user) {
-      if ($user->name != '') { // Check for anonymous user.
+      // Check for anonymous user.
+      if ($user->name != '') {
         $user_fields[$user->uid] = array();
         foreach ($fields as $field) {
           $value_of_field = $this->getValueOfField($field, $user);
@@ -156,7 +157,7 @@ class VisualscienceSearch {
         $end_config .= ', "last": "' . $field['name'] . '"';
       }
     }
-    $config = substr($config, 0, strlen($config) -1) . $end_config . '}';
+    $config = substr($config, 0, strlen($config) - 1) . $end_config . '}';
     return $config;
   }
 
@@ -171,7 +172,7 @@ class VisualscienceSearch {
     ->fields('f', array('uid'));
     $result = $query->execute();
     $final = array();
-    for ($i=0; $record = $result->fetchAssoc(); $i++) {
+    for ($i = 0; $record = $result->fetchAssoc(); $i++) {
       array_push($final, $record['uid']);
     }
     return $final;
@@ -179,6 +180,7 @@ class VisualscienceSearch {
 
   /**
    * Returns the max user id.
+   * 
    * @return int 
    *   The max user id.
    */
@@ -222,14 +224,14 @@ class VisualscienceSearch {
   /**
    * Returns the basic HTML for the search bar.
    * 
-   * @param  string $searchValue
+   * @param string $search_value
    *   Search string.
    * 
    * @return string
    *   The HTML of the searchbar.
    */
-  public function getHtmlSearchBar($searchValue = "") {
-    $safe_search_val = $this->ensureSearchSafety($searchValue);
+  public function getHtmlSearchBar($search_value = "") {
+    $safe_search_val = $this->ensureSearchSafety($search_value);
     return '<div align="center">
     <input type="search" placeholder="Search..." val="' . $safe_search_val . '" class="visualscience-search-main visualscience-search" id="visualscience-search-bar" " onKeyUp="vsUserlist.search();" />
     <div style="width:98%;" align="left">
@@ -316,18 +318,18 @@ class VisualscienceSearch {
   }
 
   /**
-   * Gets every informations needed for the client-side DB, called through ajax
+   * Gets every informations needed for the client-side DB, called through ajax.
    * 
    * @param integer $from    
    *   From which user to load the configurations
-   * @param integer $howMany 
+   * @param integer $how_many 
    *   How many users to load from $from
    * 
    * @return string           
-   *   JSON of the full data containing client-side configuration and users' data
+   *   The json data containing client configuration and users' data
    */
-  public function getUsersEntries($from = 0, $howMany = 1000) {
-    $final = $from + $howMany;
+  public function getUsersEntries($from = 0, $how_many = 1000) {
+    $final = $from + $how_many;
     $fields = $this->getFieldsFromConfig();
     $json_users_and_fields = $this->getJsonUsersFields($fields, $from, $final);
     if ($from == 0) {
@@ -337,7 +339,8 @@ class VisualscienceSearch {
       $show_messages_button = variable_get('visualscience_show_messages_button');
       $show_csv_button = variable_get('visualscience_show_csv_button');
       $show_living_science_button = variable_get('visualscience_show_livingscience_button');
-      // $show_conference_button = variable_get('visualscience_show_conference_button');.
+      // $show_conference_button 
+      // = variable_get('visualscience_show_conference_button');.
       $show_conference_button = 0;
     }
     else {
@@ -350,7 +353,7 @@ class VisualscienceSearch {
       $show_conference_button = 1;
     }
     $json_display_config = $this->getJsonDisplayConfig($fields);
-    $search_db = '{"users": ' . $json_users_and_fields . ', "config":' . $json_display_config . ', "from": ' . $from . ',  "howMany":' . $howMany . ', "nb_users_per_page": ' . $nb_users_per_page . ', "nbUsersInServerDB": ' . $nb_usersin_server_d_b . ', "total": ' . $max_id . ', "csv": ' . $show_csv_button . ', "messages": ' . $show_messages_button . ', "livingscience": ' . $show_living_science_button . ', "conference": ' . $show_conference_button . ' }';
+    $search_db = '{"users": ' . $json_users_and_fields . ', "config":' . $json_display_config . ', "from": ' . $from . ',  "how_many":' . $how_many . ', "nb_users_per_page": ' . $nb_users_per_page . ', "nbUsersInServerDB": ' . $nb_usersin_server_d_b . ', "total": ' . $max_id . ', "csv": ' . $show_csv_button . ', "messages": ' . $show_messages_button . ', "livingscience": ' . $show_living_science_button . ', "conference": ' . $show_conference_button . ' }';
     return $search_db;
   }
 }
