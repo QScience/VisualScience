@@ -52,9 +52,9 @@ class VisualscienceConfig {
   /**
    * Creates a 2D array containing the display inputs for each field.
    * 
-   * @param  array $list    list of fields
-   * @param  array $old_list Values in DB to know how to fill the fields
-   * @return  array          contains inputs for each field
+   * @param array $list    list of fields
+   * @param array $old_list Values in DB to know how to fill the fields
+   * @return array          contains inputs for each field
    */
   protected function createRows($list, $old_list) {
     $rows = array();
@@ -65,10 +65,10 @@ class VisualscienceConfig {
       $last = '';
       if (isset($old_list[$l])) {
         $actual = $old_list[$l];
-        $mini = $actual['mini'] == 1 ? 'checked': '';
-        $full = $actual['full'] == 1 ? 'checked': '';
-        $first = $actual['first'] == 1 ? 'checked': '';
-        $last = $actual['last'] == 1 ? 'checked': '';
+        $mini = $actual['mini'] == 1 ? 'checked' : '';
+        $full = $actual['full'] == 1 ? 'checked' : '';
+        $first = $actual['first'] == 1 ? 'checked' : '';
+        $last = $actual['last'] == 1 ? 'checked' : '';
       }
       $row = array(
         $l,
@@ -76,7 +76,7 @@ class VisualscienceConfig {
         '<input class="full" type="checkbox" name="' . $l . '-full" value="1" ' . $full . ' />',
         '<input class="first" type="radio" name="first" value="' . $l . '" ' . $first . ' />',
         '<input class="last" type="radio" name="last" value="' . $l . '" ' . $last . ' />',
-        );
+      );
       array_push($rows, $row);
     }
     return $rows;
@@ -85,9 +85,12 @@ class VisualscienceConfig {
   /**
    * Creates a table containing the form with all the fields to show/hide.
    * 
-   * @param  array $fields    fields in form
-   * @param  array $old_fields fields that were shown previously
-   * @return string            Drupal-generated HTML table
+   * @param array $fields
+   * fields in form
+   * @param array $old_fields
+   * fields that were shown previously
+   * @return string
+   * Drupal-generated HTML table
    */
   protected function createFieldsTable($fields, $old_fields) {
     $header = array(t('Field Name'),
@@ -123,12 +126,12 @@ class VisualscienceConfig {
   /**
    * Inserts a new field to be shown in the configuration's DB.
    * 
-   * @param  string  $name  name of the field
-   * @param  bool  $mini  wether to show it or not in the mini table
-   * @param  bool  $full  shown or not in full table
-   * @param  bool  $first is it the firstname field ?
-   * @param  bool  $last  is it the lastname field ?
-   * @param  integer $field wether it is a custom field from the install or not
+   * @param string  $name  name of the field
+   * @param bool  $mini  wether to show it or not in the mini table
+   * @param bool  $full  shown or not in full table
+   * @param bool  $first is it the firstname field ?
+   * @param bool  $last  is it the lastname field ?
+   * @param int $field wether it is a custom field from the install or not
    * @return none         nothing returned
    */
   protected function insertIntoSearchConfig($name, $mini, $full, $first, $last, $field = 0) {
@@ -147,12 +150,12 @@ class VisualscienceConfig {
   /**
    * Updates the search config DB with which fields to be shown or not.
    * 
-   * @param  string  $name  name of the field
-   * @param  bool  $mini  show or not in the mini table
-   * @param  bool  $full  show or not in the full table
-   * @param  bool  $first is it the firstname field ?
-   * @param  bool  $last  is it the astname field ?
-   * @param  integer $field is it a custom field from the install or not ?
+   * @param string  $name  name of the field
+   * @param bool  $mini  show or not in the mini table
+   * @param bool  $full  show or not in the full table
+   * @param bool  $first is it the firstname field ?
+   * @param bool  $last  is it the astname field ?
+   * @param int $field is it a custom field from the install or not ?
    * @return none         nothign returned
    */
   protected function updateSearchConfig($name, $mini, $full, $first, $last, $field = 0) {
@@ -284,7 +287,7 @@ class VisualscienceConfig {
     $number_settings = $this->getNumberSettingsHTML();
     $button_settings = $this->getButtonSettingsHTML();
     $save_button = $this->createSaveButton();
-    $csrf_token = drupal_get_token(substr('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', mt_rand(0, 50) , 1) . substr(md5(time()), 1));
+    $csrf_token = drupal_get_token(substr('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', mt_rand(0, 50), 1) . substr(md5(time()), 1));
     $form_start = '<form action="" method="POST" id="visualscience_config_form" >';
     $form_end = '<input type="hidden" name="visualscience_config_form" /><input type="hidden" value="' . $csrf_token . '" name="visualscience_config_csrf_token" /></form>';
     setcookie('csrfTokenValue', $csrf_token, time() + (86400));
@@ -307,7 +310,7 @@ class VisualscienceConfig {
   /**
    * Inserts a pattern config line into DB.
    * 
-   * @param  array $field the field to be inserted into the DB
+   * @param array $field the field to be inserted into the DB
    * @return none        nothing
    */
   public function insertPatternConfig($field) {
@@ -317,7 +320,7 @@ class VisualscienceConfig {
   /**
    * Updates a field in the DB from a pattern file.
    * 
-   * @param  array $field field to be updated
+   * @param array $field field to be updated
    * @return none        nothing returned
    */
   public function modifyPatternConfig($field) {
@@ -327,7 +330,7 @@ class VisualscienceConfig {
   /**
    * Updates the number of users shown per visualscience page setting.
    * 
-   * @param  integer $value number of user shown
+   * @param int $value number of user shown
    * @return none        nothing returned
    */
   public function updateNbUsersPerPage($value) {
@@ -337,7 +340,7 @@ class VisualscienceConfig {
   /**
    * Updates the number of user sent per ajax request when loading the users.
    * 
-   * @param  integer $value the number of users to send
+   * @param int $value the number of users to send
    * @return none        nothing returned
    */
   public function updateNbUsersPerAjax($value) {
@@ -347,7 +350,7 @@ class VisualscienceConfig {
   /**
    * Checks wether a field has everything needed to be inserted in the DB.
    * 
-   * @param  array $field field to be checkd
+   * @param array $field field to be checkd
    * @return mix        false if there was no error, else the missing field's entry
    */
   public function checkCompleteField($field) {
@@ -372,7 +375,7 @@ class VisualscienceConfig {
   /**
    * Wether a given fields is already int he database or not.
    * 
-   * @param  array $field field to check if in db or not
+   * @param array $field field to check if in db or not
    * @return bool        wether it is in the db or not
    */
   public function fieldExistsInDB($field) {
@@ -392,7 +395,7 @@ class VisualscienceConfig {
   /**
    * Checks if the field have correct value type or not.
    * 
-   * @param  array $field field whose values have to be checked
+   * @param array $field field whose values have to be checked
    * @return mix        false if everything is correct, else it is the name of the faulty field's entry
    */
   public function checkCorrectValueTypes($field) {
