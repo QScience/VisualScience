@@ -2,15 +2,17 @@
 
 /**
  * @file
- * This file contains several helping functions that are used for the module
+ * This file contains several helping functions that are used for the module.
+ * 
  * //Seb:
- * Check for the functions about how he gets the fields for the table.(visualscience_get_user_data())
+ * Check how he gets the fields for the table.(visualscience_get_user_data()).
  */
 
 /**
  *
- * Helper function, returns which user data to search
- * @return       data names wich are used for the search
+ * Helper function, returns which user data to search.
+ * @return array
+ *   Data names wich are used for the search.
  */
 function visualscience_get_user_data() {
   return array('name', 'mail', 'role', 'status', 'created');
@@ -18,32 +20,33 @@ function visualscience_get_user_data() {
 
 /**
  *
- * Helper function, returns which node data to search
- * @return       data names wich are used for the search
+ * Helper function, returns which node data to search.
+ * @return       data 
+ *   Names wich are used for the search.
  */
 function visualscience_get_node_data() {
   return array('type', 'language', 'title', 'created');
 }
 
 /**
- *
- * Returns the appropriate search data
- * @param string $table the DB table wich data is searched. Possible values are "users" and "node"
+ * Returns the appropriate search data.
+ * 
+ * @param string $table 
+ *   The DB table wich data is searched. Possible values are "users" and "node".
  */
 function visualscience_get_data($table) {
-  return $table=="users"?visualscience_get_user_data():($table=="node"?visualscience_get_node_data():FALSE);
+  return $table == "users" ? visualscience_get_user_data() : ($table == "node" ? visualscience_get_node_data() : FALSE);
 }
 
 /**
- *
- * Redirects to visualscience page
+ * Redirects to visualscience page.
  */
 function visualscience_redirect_to_visualscience() {
   drupal_goto('visualscience');
 }
 
 /**
- * returns an array containing all fields
+ * Returns an array containing all fields.
  */
 function visualscience_get_all_fields() {
   $fields = field_info_instances('user', 'user');
@@ -57,10 +60,12 @@ function visualscience_get_all_fields() {
 }
 
 /**
- *
- * Case insensitive in_array
+ * Case insensitive in_array.
+ * 
  * @param $needle
+ *   The needle
  * @param $haystack
+ *   The haystack
  */
 function visualscience_in_arrayi($needle, $haystack) {
   return in_array(strtolower($needle), array_map('strtolower', $haystack));
