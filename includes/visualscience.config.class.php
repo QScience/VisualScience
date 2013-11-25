@@ -59,6 +59,7 @@ class VisualscienceConfig {
    *   List of fields
    * @param array $old_list 
    *   Values in DB to know how to fill the fields
+   *   
    * @return array          
    *   Contains inputs for each field
    */
@@ -95,6 +96,7 @@ class VisualscienceConfig {
    *   Fields in form
    * @param array $old_fields
    *   Fields that were shown previously
+   *   
    * @return string
    *   Drupal-generated HTML table
    */
@@ -104,7 +106,7 @@ class VisualscienceConfig {
       t('Show in full table ?'),
       t('Which one is the First Name field ?'),
       t('Which one is the Last Name field ?'),
-      );
+    );
     $rows = $this->createRows($fields, $old_fields);
     return theme('table', array('header' => $header, 'rows' => $rows));
   }
@@ -146,6 +148,7 @@ class VisualscienceConfig {
    *   Is it the lastname field ?
    * @param int $field 
    *   Whether it is a custom field from the install or not
+   *   
    * @return none         
    *   Nothing returned
    */
@@ -177,6 +180,7 @@ class VisualscienceConfig {
    *   Is it the astname field ?
    * @param int $field 
    *   Is it a custom field from the install or not ?
+   *   
    * @return none         
    *   Nothign returned
    */
@@ -341,6 +345,7 @@ class VisualscienceConfig {
    * 
    * @param array $field 
    *   The field to be inserted into the DB
+   *   
    * @return none        
    *   Nothing
    */
@@ -353,6 +358,7 @@ class VisualscienceConfig {
    * 
    * @param array $field 
    *   Field to be updated
+   *   
    * @return none        
    *   Nothing returned
    */
@@ -365,6 +371,7 @@ class VisualscienceConfig {
    * 
    * @param int $value 
    *   Number of user shown
+   *   
    * @return none        
    *   Nothing returned
    */
@@ -377,6 +384,7 @@ class VisualscienceConfig {
    * 
    * @param int $value 
    *   The number of users to send
+   *   
    * @return none        
    *   Nothing returned
    */
@@ -389,6 +397,7 @@ class VisualscienceConfig {
    * 
    * @param array $field 
    *   Field to be checkd
+   *   
    * @return mix        
    *   False if there was no error, else the missing field's entry
    */
@@ -416,6 +425,7 @@ class VisualscienceConfig {
    * 
    * @param array $field 
    *   Field to check if in db or not
+   *   
    * @return bool        
    *   Whether it is in the db or not
    */
@@ -438,8 +448,9 @@ class VisualscienceConfig {
    * 
    * @param array $field 
    *   Field whose values have to be checked
+   *   
    * @return mix        
-   *   False if everything is correct, else it is the name of the faulty field's entry
+   *   False if everything is correct else the name of the faulty field's entry
    */
   public function checkCorrectValueTypes($field) {
     if (gettype($field['name']) != 'string') {
