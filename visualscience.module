@@ -104,7 +104,7 @@ function visualscience_get_file_with_id() {
  * @return string notification if success or error
  */
 function visualscience_send_message() {
-  $message = new visualscienceMessage;
+  $message = new VisualscienceMessage;
   return $message->visualscience_send_message();
 }
 

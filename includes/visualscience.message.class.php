@@ -1,25 +1,23 @@
 <?php
 /**
  * @file
- * 
  * The class that manages sending a mail through the Drupal instance.
  */
-class visualscienceMessage
+class VisualscienceMessage
 {
   
   /**
-   * Allows the sending of a mail through this Drupal instance
+   * Allows the sending of a mail through this Drupal instance.
    * 
    * @return int 
-   *   Print 1 if everything went fine, else 0
+   *   Print 1 if everything went fine, else 0.
    */
-  public function visualscience_send_message()
-  {
+  public function visualscience_send_message() {
     $subject = check_plain($_POST['subject']);
     $email = check_plain($_POST['recipients']['email']);
-    // $name =  check_plain($_POST['recipients']['name']);
+    // $name =  check_plain($_POST['recipients']['name']);.
     $message = check_plain($_POST['message']);
-    // [0][0] will give the name of object n°0, while [0][1] will give its URL
+    // [0][0] will give the name of object n°0, while [0][1] will give its URL.
     $attachments = $this->sanitizeArray($_POST['attachments']);
     if ($attachments[0]) {
       $attachments_text = t('<br /><h3>Attached Files</h3>');
@@ -51,48 +49,50 @@ class visualscienceMessage
     
     // Send e-mail.
     $message['result'] = $system->mail($message);
-    //If no errors, let's add file access to the user.
+    // If no errors, let's add file access to the user.
     if ($message['result'] == 1) {
       //getting user id from email.
       $users = db_query_range('SELECT uid FROM {users} WHERE mail = :mail', 0, 1, array(
         ':mail' => $email
       ));
-      //In the "impossible" case where two emails are the same in the db
+      // In the "impossible" case where two emails are the same in the db.
       $users = $users->fetchObject();
       $uid = $users->uid;
-      //actually adding the access to the user.
+      // actually adding the access to the user.
       if (!is_null($uid) && isset($uid)) {
         foreach ($attachments as $file) {
           $query = db_insert('visualscience_uploaded_files')->fields(array(
             'uid' => $uid,
             'email' => $from,
             'name' => $file[0],
-            'url' => $file[1]
+            'url' => $file[1],
           ));
           $query->execute();
         }
       }
       echo '1';
-    } else {
+    } 
+    else {
       echo '0';
     }
   }
   
   /**
-   * Sanitzes the content of an array recursively
-   * @param  array $un_safe_array 
+   * Sanitzes the content of an array recursively.
+   * 
+   * @param array $un_safe_array 
    *   The array to sanitize.
    *   
    * @return array
-   *   The array sanitized
+   *   The array sanitized.
    */
-  protected function sanitizeArray($un_safe_array)
-  {
+  protected function sanitizeArray($un_safe_array) {
     $safe_array = array();
     foreach ($un_safe_array as $entry) {
       if (gettype($entry) == 'array') {
         array_push($safe_array, $this->sanitizeArray($entry));
-      } else {
+      } 
+      else {
         array_push($safe_array, check_plain($entry));
       }
     }
