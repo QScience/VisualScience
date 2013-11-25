@@ -140,7 +140,7 @@ function visualscience_page($clear = TRUE) {
  * @return string         The page to be displayed
  */
 function visualscience_config_page($clear = TRUE) {
-  $config = new visualscienceConfig;
+  $config = new VisualscienceConfig;
   $output = '';
   if (isset($_POST['visualscience_config_form']) && $_POST['visualscience_config_csrf_token'] == $_COOKIE['csrfTokenValue']) {
     $config->saveSentValues();
