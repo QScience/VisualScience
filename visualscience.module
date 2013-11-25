@@ -105,7 +105,7 @@ function visualscience_get_file_with_id() {
  */
 function visualscience_send_message() {
   $message = new VisualscienceMessage;
-  return $message->visualscience_send_message();
+  return $message->visualscienceSendMessage();
 }
 
 /**
