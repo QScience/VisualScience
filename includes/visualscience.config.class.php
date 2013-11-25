@@ -17,7 +17,8 @@ class VisualscienceConfig {
   /**
    * Introductory text for the configuration page.
    *
-   * @return string The introductory text
+   * @return string 
+   *   The introductory text
    */
   protected function getIntroduction() {
     return t('Here you will be able to choose which fields you want to show when the user opens the VisualScience module. Note that every field that is in the minimized table will also be in the full one. And the last name and full name are required in the mini table.<br /> <b>At the moment, the full table option is not used, but we are working hard on it.<b>');
@@ -25,7 +26,8 @@ class VisualscienceConfig {
   /**
    * The settings HTML for configuration's numbers.
    *
-   * @return string HTML containing fields and form.
+   * @return string 
+   *   HTML containing fields and form.
    */
   protected function getNumberSettingsHTML() {
     return '<table><tr><td>' . t('Number of users to display on first search (Default: 150) :') . '</td><td><input type="number" name="nbUsersPerPage" id="nbUsersPerPage" value="' . variable_get('visualscience_user_per_search_page', 150) . '" /></td><td>' . t('Number of users sent for each Ajax request (Default: 500) :') . '</td><td><input type="number" name="nbUsersPerAjax" id="nbUsersPerAjax" value="' . variable_get('visualscience_user_sent_per_ajax_request', 500) . '" /></td></tr></table>';
@@ -34,7 +36,8 @@ class VisualscienceConfig {
   /**
    * HTML Form for configuration's buttons.
    * 
-   * @return string the HTML
+   * @return string 
+   *   The HTML
    */
   protected function getButtonSettingsHTML() {
     $csv = variable_get('visualscience_show_csv_button') ? 'checked' : '';
@@ -52,9 +55,12 @@ class VisualscienceConfig {
   /**
    * Creates a 2D array containing the display inputs for each field.
    * 
-   * @param array $list    list of fields
-   * @param array $old_list Values in DB to know how to fill the fields
-   * @return array          contains inputs for each field
+   * @param array $list    
+   *   List of fields
+   * @param array $old_list 
+   *   Values in DB to know how to fill the fields
+   * @return array          
+   *   Contains inputs for each field
    */
   protected function createRows($list, $old_list) {
     $rows = array();
@@ -86,11 +92,11 @@ class VisualscienceConfig {
    * Creates a table containing the form with all the fields to show/hide.
    * 
    * @param array $fields
-   * fields in form
+   *   Fields in form
    * @param array $old_fields
-   * fields that were shown previously
+   *   Fields that were shown previously
    * @return string
-   * Drupal-generated HTML table
+   *   Drupal-generated HTML table
    */
   protected function createFieldsTable($fields, $old_fields) {
     $header = array(t('Field Name'),
@@ -106,7 +112,8 @@ class VisualscienceConfig {
   /**
    * Save button to register values of form.
    * 
-   * @return string HTML of the button
+   * @return string 
+   *   HTML of the button
    */
   protected function createSaveButton() {
     $button = '<input type="submit" value="' . t('Save') . '" class="form-submit" />';
@@ -116,7 +123,8 @@ class VisualscienceConfig {
   /**
    * Deletes from the DB the registered previously shown fields.
    * 
-   * @return none nothing returned
+   * @return none 
+   *   Nothing returned
    */
   protected function emptyOldValues() {
     $query = db_delete('visualscience_search_config');
@@ -126,13 +134,20 @@ class VisualscienceConfig {
   /**
    * Inserts a new field to be shown in the configuration's DB.
    * 
-   * @param string  $name  name of the field
-   * @param bool  $mini  wether to show it or not in the mini table
-   * @param bool  $full  shown or not in full table
-   * @param bool  $first is it the firstname field ?
-   * @param bool  $last  is it the lastname field ?
-   * @param int $field wether it is a custom field from the install or not
-   * @return none         nothing returned
+   * @param string  $name  
+   *   name of the field
+   * @param bool  $mini  
+   *   wether to show it or not in the mini table
+   * @param bool  $full  
+   *   shown or not in full table
+   * @param bool  $first 
+   *   Is it the firstname field ?
+   * @param bool  $last  
+   *   Is it the lastname field ?
+   * @param int $field 
+   *   Whether it is a custom field from the install or not
+   * @return none         
+   *   Nothing returned
    */
   protected function insertIntoSearchConfig($name, $mini, $full, $first, $last, $field = 0) {
     $table = 'visualscience_search_config';
@@ -150,13 +165,20 @@ class VisualscienceConfig {
   /**
    * Updates the search config DB with which fields to be shown or not.
    * 
-   * @param string  $name  name of the field
-   * @param bool  $mini  show or not in the mini table
-   * @param bool  $full  show or not in the full table
-   * @param bool  $first is it the firstname field ?
-   * @param bool  $last  is it the astname field ?
-   * @param int $field is it a custom field from the install or not ?
-   * @return none         nothign returned
+   * @param string  $name  
+   *   Name of the field
+   * @param bool  $mini  
+   *   Show or not in the mini table
+   * @param bool  $full  
+   *   Show or not in the full table
+   * @param bool  $first 
+   *   Is it the firstname field ?
+   * @param bool  $last  
+   *   Is it the astname field ?
+   * @param int $field 
+   *   Is it a custom field from the install or not ?
+   * @return none         
+   *   Nothign returned
    */
   protected function updateSearchConfig($name, $mini, $full, $first, $last, $field = 0) {
     $table = 'visualscience_search_config';
@@ -175,7 +197,8 @@ class VisualscienceConfig {
   /**
    * Gets the list of default fields possible.
    * 
-   * @return array array of the fields
+   * @return array 
+   *   Array of the fields
    */
   protected function getListOfFields() {
     $user_fields = user_load(0);
@@ -185,7 +208,8 @@ class VisualscienceConfig {
   /**
    * Gets the fields that were previously shown from the DB.
    * 
-   * @return array fields that were previously shown
+   * @return array 
+   *   Fields that were previously shown
    */
   protected function getSelectedFields() {
     $query = db_select('visualscience_search_config', 'f')
@@ -201,7 +225,8 @@ class VisualscienceConfig {
   /**
    * Saves the number settings of the configuration page.
    * 
-   * @return none nothing returned
+   * @return none 
+   *   Nothing returned
    */
   protected function saveNumbersSettings() {
     $nb_users_per_page = filter_xss(check_plain($_POST['nbUsersPerPage']));
@@ -217,7 +242,8 @@ class VisualscienceConfig {
   /**
    * Saves the visibility settings of actionbar's buttons.
    * 
-   * @return none nothing returned
+   * @return none 
+   *   Nothing returned
    */
   protected function saveVisibilitySettings() {
     if (isset($_POST['vs_show_csv'])) {
@@ -249,7 +275,8 @@ class VisualscienceConfig {
   /**
    * Saves each field that has to be shown in the Database.
    * 
-   * @return none nothing returned
+   * @return none 
+   *   Nothing returned
    */
   protected function saveFields() {
     $fields_list = $this->getListOfFields();
@@ -277,7 +304,8 @@ class VisualscienceConfig {
   /**
    * Creates the HTML of the configuration page.
    * 
-   * @return string HTML of the config page
+   * @return string 
+   *   HTML of the config page
    */
   public function getHtmlConfigPage() {
     $fields_list = $this->getListOfFields();
@@ -297,7 +325,8 @@ class VisualscienceConfig {
   /**
    * Registers a submit configuration form.
    * 
-   * @return none nothing returned
+   * @return none 
+   *   Nothing returned
    */
   public function saveSentValues() {
     $this->emptyOldValues();
@@ -310,8 +339,10 @@ class VisualscienceConfig {
   /**
    * Inserts a pattern config line into DB.
    * 
-   * @param array $field the field to be inserted into the DB
-   * @return none        nothing
+   * @param array $field 
+   *   The field to be inserted into the DB
+   * @return none        
+   *   Nothing
    */
   public function insertPatternConfig($field) {
     $this->insertIntoSearchConfig($field['name'], $field['mini'], $field['full'], $field['first'], $field['last']);
@@ -320,8 +351,10 @@ class VisualscienceConfig {
   /**
    * Updates a field in the DB from a pattern file.
    * 
-   * @param array $field field to be updated
-   * @return none        nothing returned
+   * @param array $field 
+   *   Field to be updated
+   * @return none        
+   *   Nothing returned
    */
   public function modifyPatternConfig($field) {
     $this->updateSearchConfig($field['name'], $field['mini'], $field['full'], $field['first'], $field['last']);
@@ -330,8 +363,10 @@ class VisualscienceConfig {
   /**
    * Updates the number of users shown per visualscience page setting.
    * 
-   * @param int $value number of user shown
-   * @return none        nothing returned
+   * @param int $value 
+   *   Number of user shown
+   * @return none        
+   *   Nothing returned
    */
   public function updateNbUsersPerPage($value) {
     variable_set('visualscience_user_per_search_page', intval($value));
@@ -340,8 +375,10 @@ class VisualscienceConfig {
   /**
    * Updates the number of user sent per ajax request when loading the users.
    * 
-   * @param int $value the number of users to send
-   * @return none        nothing returned
+   * @param int $value 
+   *   The number of users to send
+   * @return none        
+   *   Nothing returned
    */
   public function updateNbUsersPerAjax($value) {
     variable_set('visualscience_user_sent_per_ajax_request', intval($value));
@@ -350,8 +387,10 @@ class VisualscienceConfig {
   /**
    * Checks wether a field has everything needed to be inserted in the DB.
    * 
-   * @param array $field field to be checkd
-   * @return mix        false if there was no error, else the missing field's entry
+   * @param array $field 
+   *   Field to be checkd
+   * @return mix        
+   *   False if there was no error, else the missing field's entry
    */
   public function checkCompleteField($field) {
     if (!(isset($field['name']))) {
@@ -375,8 +414,10 @@ class VisualscienceConfig {
   /**
    * Wether a given fields is already int he database or not.
    * 
-   * @param array $field field to check if in db or not
-   * @return bool        wether it is in the db or not
+   * @param array $field 
+   *   Field to check if in db or not
+   * @return bool        
+   *   Whether it is in the db or not
    */
   public function fieldExistsInDB($field) {
     $result = db_select('visualscience_search_config', 'c')
@@ -395,8 +436,10 @@ class VisualscienceConfig {
   /**
    * Checks if the field have correct value type or not.
    * 
-   * @param array $field field whose values have to be checked
-   * @return mix        false if everything is correct, else it is the name of the faulty field's entry
+   * @param array $field 
+   *   Field whose values have to be checked
+   * @return mix        
+   *   False if everything is correct, else it is the name of the faulty field's entry
    */
   public function checkCorrectValueTypes($field) {
     if (gettype($field['name']) != 'string') {
