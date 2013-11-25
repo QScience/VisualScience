@@ -10,7 +10,7 @@ class VisualscienceConfig {
    *
    * Only adds the needed JS.
    */
-  protected function __construct() {
+  public function __construct() {
     drupal_add_js(drupal_get_path('module', 'visualscience') . '/javascript/visualscience.config.js');
   }
 
