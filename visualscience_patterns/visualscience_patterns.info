@@ -6,4 +6,3 @@ php = 5.3
 
 dependencies[] = visualscience
 dependencies[] = patterns
-
