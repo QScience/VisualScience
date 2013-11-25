@@ -16,6 +16,7 @@ class VisualscienceConfig {
 
   /**
    * Introductory text for the configuration page.
+   *
    * 
    * @return string The introductory text
    */
@@ -23,7 +24,8 @@ class VisualscienceConfig {
     return t('Here you will be able to choose which fields you want to show when the user opens the VisualScience module. Note that every field that is in the minimized table will also be in the full one. And the last name and full name are required in the mini table.<br /> <b>At the moment, the full table option is not used, but we are working hard on it.<b>');
   }
   /**
-   * The settings HTML for configuration's numbers
+   * The settings HTML for configuration's numbers.
+   *
    * 
    * @return string HTML containing fields and form.
    */
