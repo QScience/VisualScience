@@ -2,14 +2,16 @@
 
 /**
  * @file
- * Some general settings, such as the Help Page and a function to define the permissions.
+ * Some general settings, Help Page and a way to define the permissions.
+ * 
  * TODO: replace both functions.
  */
 
 
 /**
  * Implements hook_help().
- * TODO: Write a user friendly help
+ * 
+ * TODO: Write a user friendly help.
  */
 function visualscience_help($path, $arg) {
   switch ($path) {
@@ -30,13 +32,12 @@ function visualscience_help($path, $arg) {
     </ul><h2>Search</h2>
 
     <p>Use Refine Search for filtering the list according to the given criteria.</p>';
-        return t($output);
   }
+  return t($output);
 }
 
 /**
- * Implementes hook_permission().
- *
+ * Implements hook_permission().
  */
 function visualscience_permission() {
   return array(
