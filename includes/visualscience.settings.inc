@@ -14,6 +14,7 @@
  * TODO: Write a user friendly help.
  */
 function visualscience_help($path, $arg) {
+  $output = '';
   switch ($path) {
     case 'admin/help#visualscience':
       $output = t('<h1>
