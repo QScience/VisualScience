@@ -3,6 +3,7 @@
  * @file
  * Provides everything to handle upload and downloading files.
  */
+
 class VisualscienceUpload {
 
   /**
@@ -112,7 +113,7 @@ class VisualscienceUpload {
         $id = $result->fid;
         $vs_url = drupal_get_path('module', 'visualscience');
         if (strpos($vs_url, '?')) {
-        // Handling the clean url problem.
+          // Handling the clean url problem.
           drupal_set_message(t('The file has been uploaded to: @url', array('@url' => $base_url . '/visualscience/file&id=' . $id)));
         }
         else {
