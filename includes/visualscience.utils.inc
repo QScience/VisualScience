@@ -9,7 +9,6 @@
  */
 
 /**
- *
  * Helper function, returns which user data to search.
  * @return array
  *   Data names wich are used for the search.
@@ -19,9 +18,9 @@ function visualscience_get_user_data() {
 }
 
 /**
- *
  * Helper function, returns which node data to search.
- * @return       data 
+ * 
+ * @return array 
  *   Names wich are used for the search.
  */
 function visualscience_get_node_data() {
@@ -52,8 +51,9 @@ function visualscience_get_all_fields() {
   $fields = field_info_instances('user', 'user');
   $field_names = array();
   foreach ($fields as $name => $value) {
-    if (strpos($name, "field_") !== 0)
+    if (strpos($name, "field_") !== 0) {
       continue;
+    }
     array_push($field_names, $name);
   }
   return $field_names;
@@ -62,9 +62,9 @@ function visualscience_get_all_fields() {
 /**
  * Case insensitive in_array.
  * 
- * @param $needle
+ * @param mix $needle
  *   The needle
- * @param $haystack
+ * @param array $haystack
  *   The haystack
  */
 function visualscience_in_arrayi($needle, $haystack) {
