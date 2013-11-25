@@ -152,12 +152,11 @@ function visualscience_patterns_validate($action, $tag, &$data) {
         }
         else {
           $status = PATTERNS_ERR;
-          $msg = t('The field "@wrong_value_type" has a wrong value type for @field_name.', 
+          $msg = t('The field "@wrong_value_type" has a wrong value type for @field_name.',
             array(
-              '@field_name' => $field['name'], 
-              '@wrong_value_type' => $wrong_value_type
-            ),
-          );
+              '@field_name' => $field['name'],
+              '@wrong_value_type' => $wrong_value_type,
+            ));
         }
       }
       else {
@@ -339,7 +338,7 @@ function visualscience_export_config($args = NULL, &$result = NULL) {
         'mini' => $field['mini'],
         'full' => $field['full'],
         'first' => $field['first'],
-        'last' => $field['last']
+        'last' => $field['last'],
       ),
     );
 
