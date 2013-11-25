@@ -12,7 +12,7 @@ class visualscienceMessage {
     public function visualscience_send_message() {
         $subject =  check_plain($_POST['subject']);
         $email = check_plain($_POST['recipients']['email']);
-        $name =  check_plain($_POST['recipients']['name']);
+        // $name =  check_plain($_POST['recipients']['name']);
         $message =  check_plain($_POST['message']);
         $attachments =  $this->sanitizeArray($_POST['attachments']);// [0][0] will give the name of object n°0, while [0][1] will give its URL
         if ($attachments[0]) {

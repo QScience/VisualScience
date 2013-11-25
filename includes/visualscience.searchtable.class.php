@@ -282,7 +282,6 @@ class visualscienceSearch {
     if ($from == 0) {
       $maxId = $this->getMaxUserId();
       $nbUsersPerPage = variable_get('visualscience_user_per_search_page', 150);
-      $nbUserPerAjax = variable_get('visualscience_user_sent_per_ajax_request', 500);
       $nbUsersinServerDB = $this->getCountOfUsers();
       $showMessagesButton = variable_get('visualscience_show_messages_button');
       $showCSVButton = variable_get('visualscience_show_csv_button');
@@ -293,7 +292,6 @@ class visualscienceSearch {
     else {
       $maxId = 0;
       $nbUsersPerPage = 150;
-      $nbUserPerAjax = 500;
       $nbUsersinServerDB = 0;
       $showMessagesButton = 1;
       $showCSVButton = 1;
