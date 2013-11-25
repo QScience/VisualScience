@@ -1,54 +1,59 @@
 <?php
 
-/*
+/**
  * @file
  * The install file for the VisualScience module.
+ * 
  * It includes:
- * - Definition of the DB tables
- * - Definition of the basic configuration for VisualScience
+ * - Definition of the DB tables.
+ * - Definition of the basic configuration for VisualScience.
  */
 
 include_once 'includes/visualscience.utils.inc';
 
 /**
  * Implements hook_schema().
- * @return array  the created schema
+ * 
+ * @return array  
+ *   The created schema
  */
 function visualscience_schema() {
   //table for saved searches  Seb: Keep it, just in case you need to save the searches.
-  /* $schema[visualscience_get_save_table_name()] = array(
-     'description' => 'Stores searches.',
-     'fields' => array(
-     'sid' => array(
-     'type' => 'serial',
-     'unsigned' => TRUE,
-     'not null' => TRUE,
-     'description' => 'Primary Key: Unique search ID.',
-     ),
-     'uid' => array(
-     'type' => 'int',
-     'unsigned' => TRUE,
-     'not null' => TRUE,
-     'description' => 'Secondary Key: User ID who has saved the search.',
-     ),
-     'name' => array(
-     'type' => 'varchar',
-     'length' => 55,
-     'default' => '',
-     'description' => 'Machine readable name of this search.',
-     ),
-     'search' => array(
-     'type' => 'varchar',
-     'length' => 1024,
-     'default' => '',
-     'description' => 'The text of this search.',
-     ),
-     ),
-     'primary key' => array('sid'),
-     'unique keys' => array('name' => array('name'))
-     );*/
+  /* 
+   * $schema[visualscience_get_save_table_name()] = array(
+   *  'description' => 'Stores searches.',
+   *  'fields' => array(
+   *  'sid' => array(
+   *  'type' => 'serial',
+   *  'unsigned' => TRUE,
+   *  'not null' => TRUE,
+   *  'description' => 'Primary Key: Unique search ID.',
+   *  ),
+   *  'uid' => array(
+   *  'type' => 'int',
+   *  'unsigned' => TRUE,
+   *  'not null' => TRUE,
+   *  'description' => 'Secondary Key: User ID who has saved the search.',
+   *  ),
+   *  'name' => array(
+   *  'type' => 'varchar',
+   *  'length' => 55,
+   *  'default' => '',
+   *  'description' => 'Machine readable name of this search.',
+   *  ),
+   *  'search' => array(
+   *  'type' => 'varchar',
+   *  'length' => 1024,
+   *  'default' => '',
+   *  'description' => 'The text of this search.',
+   *  ),
+   *  ),
+   *  'primary key' => array('sid'),
+   *  'unique keys' => array('name' => array('name'))
+   *  );
+   */
 
-//Table to save the config of visualscience search tables
+// Table to save the config of visualscience search tables.
   $schema['visualscience_search_config'] = array(
     'description' => 'Stores VisualScience Configuration.',
     'fields' => array(
@@ -108,7 +113,7 @@ function visualscience_schema() {
     'primary key' => array('cid'),
   );
 
-  //table for uploaded files and their permissions
+  // Table for uploaded files and their permissions.
   $schema['visualscience_uploaded_files'] = array(
     'description' => 'Uploaded Files and Permissions',
     'fields' => array(
@@ -154,7 +159,7 @@ function visualscience_schema() {
  */
 function visualscience_uninstall() {
   drupal_uninstall_schema('visualscience');
-  //deleting the previously set persistent variables
+  // Deleting the previously set persistent variables.
   variable_del('visualscience_user_sent_per_ajax_request');
   variable_del('visualscience_user_per_search_page');
 }
@@ -163,7 +168,7 @@ function visualscience_uninstall() {
  * Implements hook_install().
  */
 function visualscience_install() {
-  //drupal_install_schema('visualscience');
+  // Test: drupal_install_schema('visualscience');.
   $name = new stdClass();
   $mail = new stdClass();
   $roles = new stdClass();
@@ -221,11 +226,11 @@ function visualscience_install() {
   }
   drupal_write_record('visualscience_search_config', $mail);
 
-  //Setting some persistent variables that can be changed in the config page.
+  // Setting some persistent variables that can be changed in the config page.
   variable_set('visualscience_user_sent_per_ajax_request', 500);
   variable_set('visualscience_user_per_search_page', 150);
 
-  //Settings for visibility of actionbar's buttons
+  // Settings for visibility of actionbar's buttons.
   variable_set('visualscience_show_csv_button', 1);
   variable_set('visualscience_show_messages_button', 1);
   variable_set('visualscience_show_livingscience_button', 1);
