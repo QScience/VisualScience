@@ -17,7 +17,6 @@ class VisualscienceConfig {
   /**
    * Introductory text for the configuration page.
    *
-   * 
    * @return string The introductory text
    */
   protected function getIntroduction() {
@@ -26,7 +25,6 @@ class VisualscienceConfig {
   /**
    * The settings HTML for configuration's numbers.
    *
-   * 
    * @return string HTML containing fields and form.
    */
   protected function getNumberSettingsHTML() {
@@ -34,7 +32,7 @@ class VisualscienceConfig {
   }
 
   /**
-   * HTML Form for configuration's buttons
+   * HTML Form for configuration's buttons.
    * 
    * @return string the HTML
    */
@@ -52,21 +50,21 @@ class VisualscienceConfig {
   }
 
   /**
-   * Creates a 2D array containing the display inputs for each field
+   * Creates a 2D array containing the display inputs for each field.
    * 
    * @param  array $list    list of fields
-   * @param  array $oldList Values in DB to know how to fill the fields
-   * @return array          contains inputs for each field
+   * @param  array $old_list Values in DB to know how to fill the fields
+   * @return  array          contains inputs for each field
    */
-  protected function createRows($list, $oldList) {
+  protected function createRows($list, $old_list) {
     $rows = array();
     foreach ($list as $l) {
       $mini = '';
       $full = '';
       $first = '';
       $last = '';
-      if (isset($oldList[$l])) {
-        $actual = $oldList[$l];
+      if (isset($old_list[$l])) {
+        $actual = $old_list[$l];
         $mini = $actual['mini'] == 1 ? 'checked': '';
         $full = $actual['full'] == 1 ? 'checked': '';
         $first = $actual['first'] == 1 ? 'checked': '';
@@ -85,25 +83,25 @@ class VisualscienceConfig {
   }
 
   /**
-   * Creates a table containing the form with all the fields to show/hide
+   * Creates a table containing the form with all the fields to show/hide.
    * 
    * @param  array $fields    fields in form
-   * @param  array $oldFields fields that were shown previously
+   * @param  array $old_fields fields that were shown previously
    * @return string            Drupal-generated HTML table
    */
-  protected function createFieldsTable($fields, $oldFields) {
+  protected function createFieldsTable($fields, $old_fields) {
     $header = array(t('Field Name'),
       t('Show in minimized table ?'),
       t('Show in full table ?'),
       t('Which one is the First Name field ?'),
       t('Which one is the Last Name field ?'),
       );
-    $rows = $this->createRows($fields, $oldFields);
+    $rows = $this->createRows($fields, $old_fields);
     return theme('table', array('header' => $header, 'rows' => $rows));
   }
 
   /**
-   * Save button to register values of form
+   * Save button to register values of form.
    * 
    * @return string HTML of the button
    */
@@ -113,7 +111,7 @@ class VisualscienceConfig {
   }
 
   /**
-   * Deletes from the DB the registered previously shown fields
+   * Deletes from the DB the registered previously shown fields.
    * 
    * @return none nothing returned
    */
@@ -123,7 +121,7 @@ class VisualscienceConfig {
   }
 
   /**
-   * Inserts a new field to be shown in the configuration's DB
+   * Inserts a new field to be shown in the configuration's DB.
    * 
    * @param  string  $name  name of the field
    * @param  bool  $mini  wether to show it or not in the mini table
@@ -147,7 +145,7 @@ class VisualscienceConfig {
   }
 
   /**
-   * Updates the search config DB with which fields to be shown or not
+   * Updates the search config DB with which fields to be shown or not.
    * 
    * @param  string  $name  name of the field
    * @param  bool  $mini  show or not in the mini table
@@ -172,17 +170,17 @@ class VisualscienceConfig {
   }
 
   /**
-   * Gets the list of default fields possible
+   * Gets the list of default fields possible.
    * 
    * @return array array of the fields
    */
   protected function getListOfFields() {
-    $userFields = user_load(0);
-    return array_keys(get_object_vars($userFields));
+    $user_fields = user_load(0);
+    return array_keys(get_object_vars($user_fields));
   }
 
   /**
-   * Gets the fields that were previously shown from the DB
+   * Gets the fields that were previously shown from the DB.
    * 
    * @return array fields that were previously shown
    */
@@ -198,23 +196,23 @@ class VisualscienceConfig {
   }
 
   /**
-   * Saves the number settings of the configuration page
+   * Saves the number settings of the configuration page.
    * 
    * @return none nothing returned
    */
   protected function saveNumbersSettings() {
-    $nbUsersPerPage = filter_xss(check_plain($_POST['nbUsersPerPage']));
-    $nbUsersPerAjax = filter_xss(check_plain($_POST['nbUsersPerAjax']));
-    if (isset($nbUsersPerPage) && $nbUsersPerPage !== 0) {
-      $this->updateNbUsersPerPage($nbUsersPerPage);
+    $nb_users_per_page = filter_xss(check_plain($_POST['nbUsersPerPage']));
+    $nb_users_per_ajax = filter_xss(check_plain($_POST['nbUsersPerAjax']));
+    if (isset($nb_users_per_page) && $nb_users_per_page !== 0) {
+      $this->updateNbUsersPerPage($nb_users_per_page);
     }
-    if (isset($nbUsersPerAjax) && $nbUsersPerAjax !== 0) {
-      $this->updateNbUsersPerAjax($nbUsersPerAjax);
+    if (isset($nb_users_per_ajax) && $nb_users_per_ajax !== 0) {
+      $this->updateNbUsersPerAjax($nb_users_per_ajax);
     }
   }
 
   /**
-   * Saves the visibility settings of actionbar's buttons
+   * Saves the visibility settings of actionbar's buttons.
    * 
    * @return none nothing returned
    */
@@ -246,13 +244,13 @@ class VisualscienceConfig {
   }
 
   /**
-   * Saves each field that has to be shown in the Database
+   * Saves each field that has to be shown in the Database.
    * 
    * @return none nothing returned
    */
   protected function saveFields() {
-    $fieldsList = $this->getListOfFields();
-    foreach ($fieldsList as $field) {
+    $fields_list = $this->getListOfFields();
+    foreach ($fields_list as $field) {
       if (isset($_POST['first']) && $_POST['first'] == $field) {
         if (isset($_POST['last']) && $_POST['last'] == $field) {
           $this->insertIntoSearchConfig($field, 1, 1, 1, 1, 0);
@@ -274,27 +272,27 @@ class VisualscienceConfig {
   }
 
   /**
-   * Creates the HTML of the configuration page
+   * Creates the HTML of the configuration page.
    * 
    * @return string HTML of the config page
    */
   public function getHtmlConfigPage() {
-    $fieldsList = $this->getListOfFields();
-    $oldFields = $this->getSelectedFields();
+    $fields_list = $this->getListOfFields();
+    $old_fields = $this->getSelectedFields();
     $intro = $this->getIntroduction();
-    $fieldsTable = $this->createFieldsTable($fieldsList, $oldFields);
-    $numberSettings = $this->getNumberSettingsHTML();
-    $buttonSettings = $this->getButtonSettingsHTML();
-    $saveButton = $this->createSaveButton();
-    $csrfToken = drupal_get_token(substr('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', mt_rand(0, 50) , 1) . substr(md5(time()), 1));
-    $formStart = '<form action="" method="POST" id="visualscience_config_form" >';
-    $formEnd = '<input type="hidden" name="visualscience_config_form" /><input type="hidden" value="' . $csrfToken . '" name="visualscience_config_csrf_token" /></form>';
-    setcookie('csrfTokenValue', $csrfToken, time() + (86400));
-    return $formStart . $intro . $fieldsTable . $numberSettings . $buttonSettings . $saveButton . $formEnd;
+    $fields_table = $this->createFieldsTable($fields_list, $old_fields);
+    $number_settings = $this->getNumberSettingsHTML();
+    $button_settings = $this->getButtonSettingsHTML();
+    $save_button = $this->createSaveButton();
+    $csrf_token = drupal_get_token(substr('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', mt_rand(0, 50) , 1) . substr(md5(time()), 1));
+    $form_start = '<form action="" method="POST" id="visualscience_config_form" >';
+    $form_end = '<input type="hidden" name="visualscience_config_form" /><input type="hidden" value="' . $csrf_token . '" name="visualscience_config_csrf_token" /></form>';
+    setcookie('csrfTokenValue', $csrf_token, time() + (86400));
+    return $form_start . $intro . $fields_table . $number_settings . $button_settings . $save_button . $form_end;
   }
 
   /**
-   * Registers a submit configuration form
+   * Registers a submit configuration form.
    * 
    * @return none nothing returned
    */
@@ -307,7 +305,7 @@ class VisualscienceConfig {
   }
 
   /**
-   * Inserts a pattern config line into DB
+   * Inserts a pattern config line into DB.
    * 
    * @param  array $field the field to be inserted into the DB
    * @return none        nothing
@@ -317,7 +315,7 @@ class VisualscienceConfig {
   }
 
   /**
-   * Updates a field in the DB from a pattern file
+   * Updates a field in the DB from a pattern file.
    * 
    * @param  array $field field to be updated
    * @return none        nothing returned
@@ -327,7 +325,7 @@ class VisualscienceConfig {
   }
 
   /**
-   * Updates the number of users shown per visualscience page setting
+   * Updates the number of users shown per visualscience page setting.
    * 
    * @param  integer $value number of user shown
    * @return none        nothing returned
@@ -337,7 +335,7 @@ class VisualscienceConfig {
   }
 
   /**
-   * Updates the number of user sent per ajax request when loading the users
+   * Updates the number of user sent per ajax request when loading the users.
    * 
    * @param  integer $value the number of users to send
    * @return none        nothing returned
@@ -347,7 +345,7 @@ class VisualscienceConfig {
   }
 
   /**
-   * Checks wether a field has everything needed to be inserted in the DB
+   * Checks wether a field has everything needed to be inserted in the DB.
    * 
    * @param  array $field field to be checkd
    * @return mix        false if there was no error, else the missing field's entry
@@ -392,7 +390,7 @@ class VisualscienceConfig {
   }
 
   /**
-   * Checks if the field have correct value type or not
+   * Checks if the field have correct value type or not.
    * 
    * @param  array $field field whose values have to be checked
    * @return mix        false if everything is correct, else it is the name of the faulty field's entry
