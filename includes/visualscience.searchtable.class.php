@@ -1,22 +1,29 @@
 <?php
 /**
- * @file(visualscience.searchtable.class.php)
+ * @file
  * File to generate and handle search and user related queries
  */
-class visualscienceSearch {
+
+class VisualscienceSearch {
   /**
-   * Makes the search string safe for PHP
-   * @param  string $search the search string
-   * @return string         safe search string query
+   * Makes the search string safe for PHP.
+   * 
+   * @param  string $search
+   *   The search string.
+   *   
+   * @return string
+   *   Safe search string query.
    */
   private function ensureSearchSafety($search) {
-    //TODO: Implement it in a better way!
+    // TODO: Implement it in a better way!
     return check_plain($search);
   }
 
   /**
    * Returns the current fields in the visualscience configuration page.
-   * @return array of those fields with their values
+   * 
+   * @return array 
+   *   Of those fields with their values.
    */
   private function getFieldsFromConfig() {
     $query = db_select('visualscience_search_config', 'f')
@@ -30,10 +37,15 @@ class visualscienceSearch {
   }
 
   /**
-   * Gets the value of a given field and given user
-   * @param  array $field containing the field configuration
-   * @param  object $user  user object from db
-   * @return string        the content of the queried field
+   * Gets the value of a given field and given user.
+   * 
+   * @param array $field
+   *   Containing the field configuration.
+   * @param object $user
+   *   User object from db.
+   *   
+   * @return string
+   *   The content of the queried field.
    */
   private function getValueOfField($field, $user) {
     $value = $user->$field['name'];
@@ -61,11 +73,17 @@ class visualscienceSearch {
   }
 
   /**
-   * Gets the fields'values for a range of users
-   * @param  array  $fields the fields asked for
-   * @param  integer $from   start index of users to get
-   * @param  integer $to     end index of users to get
-   * @return array          the array of fields for queried users
+   * Gets the fields'values for a range of users.
+   * 
+   * @param array  $fields 
+   *  The fields asked for.
+   * @param integer $from   
+   *   Start index of users to get.
+   * @param integer $to     
+   *   End index of users to get.
+   * 
+   * @return array
+   *   The array of fields for queried users.
    */
   private function getUsersFields($fields, $from=0, $to=0) {
     if ($to != 0) {
@@ -81,7 +99,7 @@ class visualscienceSearch {
     $users = user_load_multiple($usersIds);
     $userFields = array();
     foreach ($users as $user) {
-      if ($user->name != '') { // check for anonymous user
+      if ($user->name != '') { // Check for anonymous user.
         $userFields[$user->uid] = array();
         foreach ($fields as $field) {
           $valueOfField = $this->getValueOfField($field, $user);
@@ -101,20 +119,30 @@ class visualscienceSearch {
   }
 
   /**
-   * Gets the range users' fields in a json format
-   * @param  array $fields the fields to get
-   * @param  integer $from   start index to get users
-   * @param  integer $to     end index to get users
-   * @return string         json string of all fields for queried useres
+   * Gets the range users' fields in a json format.
+   * 
+   * @param array $fields 
+   *   The fields to get.
+   * @param int $from   
+   *   Start index to get users.
+   * @param int $to     
+   *   End index to get users.
+   *   
+   * @return string         
+   *   Json string of all fields for queried useres.
    */
   private function getJsonUsersFields($fields, $from, $to) {
     return json_encode($this->getUsersFields($fields, $from, $to));
   }
 
   /**
-   * Returns the display configuration for search table in json format
-   * @param  array $fields fields that should be displayed
-   * @return string         Json format of the configuration
+   * Returns the display configuration for search table in json format.
+   * 
+   * @param array $fields 
+   *   Fields that should be displayed.
+   * 
+   * @return string         
+   *   Json format of the configuration.
    */
   private function getJsonDisplayConfig($fields) {
     $config = '{"fields": [';
@@ -133,8 +161,10 @@ class visualscienceSearch {
   }
 
   /**
-   * Returns the ui dof every user in db
-   * @return array array of all uids
+   * Returns the ui dof every user in db.
+   * 
+   * @return array a
+   *   Array of all uids.
    */
   private function getAllUsersIds() {
     $query = db_select('users', 'f')
@@ -148,8 +178,9 @@ class visualscienceSearch {
   }
 
   /**
-   * Returns the max user id
-   * @return integer the max user id
+   * Returns the max user id.
+   * @return int 
+   *   The max user id.
    */
   private function getMaxUserId() {
     $max_id = db_select('users', 'x')
@@ -163,8 +194,9 @@ class visualscienceSearch {
   }
 
   /**
-   * Counts the number of users in the db
-   * @return integer number of users in db
+   * Counts the number of users in the db.
+   * @return int 
+   *   Number of users in db.
    */
   private function getCountOfUsers() {
     $query = db_select('users', 'f')
@@ -174,8 +206,10 @@ class visualscienceSearch {
   }
 
   /**
-   * Returns the saved searched
-   * @return string to be implemented.
+   * Returns the saved searched.
+   * 
+   * @return string 
+   *   To be implemented.
    */
   public function getSavedSearch() {
     //TODO: Implement it
@@ -187,8 +221,12 @@ class visualscienceSearch {
 
   /**
    * Returns the basic HTML for the search bar.
-   * @param  string $searchValue search string
-   * @return string              the HTML of the searchbar
+   * 
+   * @param  string $searchValue
+   *   Search string.
+   * 
+   * @return string
+   *   The HTML of the searchbar.
    */
   public function getHtmlSearchBar($searchValue= "") {
     $safeSearchVal = $this->ensureSearchSafety($searchValue);
@@ -203,16 +241,20 @@ class visualscienceSearch {
   }
 
   /**
-   * Returns the HTML for the visualscience page
-   * @return string the html where VisualScience is going to be set up
+   * Returns the HTML for the visualscience page.
+   * 
+   * @return string 
+   *   The html where VisualScience is going to be set up.
    */
   public function getHtmlSearchTable() {
     return '<div id="visualscience-container"></div>';
   }
 
   /**
-   * Gets the JSON of the user database with the config
-   * @return string script tage with the database in json format.
+   * Gets the JSON of the user database with the config.
+   * 
+   * @return string 
+   *   Script tag with the database in json format.
    */
   public function getJsonDatabase() {
     $fields = $this->getFieldsFromConfig();
@@ -223,8 +265,10 @@ class visualscienceSearch {
   }
 
   /**
-   * Adds client-side files needed for the application
-   * @return none files added with druapal api.
+   * Adds client-side files needed for the application.
+   * 
+   * @return none 
+   *   Files added with druapal api.
    */
   public function getClientSideFiles() {
     global $user;
@@ -243,7 +287,7 @@ class visualscienceSearch {
     drupal_add_css(drupal_get_path('module', 'visualscience') . '/css/visualscience.jquery.tablesorter.css');
     drupal_add_js(drupal_get_path('module', 'visualscience') . '/javascript/lib/visualscience.handlebars.js');
     drupal_add_js(drupal_get_path('module', 'visualscience') . '/javascript/lib/visualscience.nddb.js');
-      //Settings necessary to VisualScience:
+      // Settings necessary to VisualScience:
     drupal_add_js(array('installFolder' => $base_path . drupal_get_path('module', 'visualscience') . '/'), 'setting');
     if (isset($user->name)) {
       drupal_add_js(array('username' => $user->name), 'setting');
@@ -262,8 +306,10 @@ class visualscienceSearch {
   }
 
   /**
-   * Returns the configuration for the export action of pattern
-   * @return array with the search table fields configuration
+   * Returns the configuration for the export action of pattern.
+   * 
+   * @return array 
+   *   With the search table fields configuration.
    */
   public function getPatternConfiguration() {
     return $this->getFieldsFromConfig();
@@ -271,9 +317,14 @@ class visualscienceSearch {
 
   /**
    * Gets every informations needed for the client-side DB, called through ajax
-   * @param  integer $from    from which user to load the configurations
-   * @param  integer $howMany how many users to load from $from
-   * @return string           JSON of the full data containing client-side configuration and users' data
+   * 
+   * @param integer $from    
+   *   From which user to load the configurations
+   * @param integer $howMany 
+   *   How many users to load from $from
+   * 
+   * @return string           
+   *   JSON of the full data containing client-side configuration and users' data
    */
   public function getUsersEntries($from=0, $howMany=1000) {
     $final = $from + $howMany;
@@ -286,7 +337,7 @@ class visualscienceSearch {
       $showMessagesButton = variable_get('visualscience_show_messages_button');
       $showCSVButton = variable_get('visualscience_show_csv_button');
       $showLivingScienceButton = variable_get('visualscience_show_livingscience_button');
-      // $showConferenceButton = variable_get('visualscience_show_conference_button');
+      // $showConferenceButton = variable_get('visualscience_show_conference_button');.
       $showConferenceButton = 0;
     }
     else {

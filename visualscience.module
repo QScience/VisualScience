@@ -125,7 +125,7 @@ function visualscience_upload_submit($form, &$form_state) {
  * @return string         The webpage to be printed
  */
 function visualscience_page($clear = TRUE) {
-  $search = new visualscienceSearch;
+  $search = new VisualscienceSearch;
   $search_to_perform = $search->getSavedSearch();
   $search->getClientSideFiles();
   $search_bar = $search->getHtmlSearchBar($search_to_perform);
@@ -155,7 +155,7 @@ function visualscience_config_page($clear = TRUE) {
  * @return json the list of users with some additional informations
  */
 function visualscience_users() {
-  $search = new visualscienceSearch;
+  $search = new VisualscienceSearch;
   $from = intval($_GET['userId']);
   $database = $search->getUsersEntries($from, variable_get('visualscience_user_sent_per_ajax_request', 1000));
   echo $database;

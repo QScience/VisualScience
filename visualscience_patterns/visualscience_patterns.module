@@ -274,7 +274,7 @@ function visualscience_export_config($args = NULL, &$result = NULL) {
     $action_type = PATTERNS_CREATE;
   }
 
-  $search = new visualscienceSearch;
+  $search = new VisualscienceSearch;
   $fields =  $search->getPatternConfiguration();
   foreach ($fields as $field) {
     $action = array($action_type => array(
