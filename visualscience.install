@@ -2,7 +2,7 @@
 
 /*
  * @file
- * The install file for the VisualScience module. 
+ * The install file for the VisualScience module.
  * It includes:
  * - Definition of the DB tables
  * - Definition of the basic configuration for VisualScience
@@ -16,137 +16,137 @@ include_once 'includes/visualscience.utils.inc';
  */
 function visualscience_schema() {
   //table for saved searches  Seb: Keep it, just in case you need to save the searches.
- /* $schema[visualscience_get_save_table_name()] = array(
-    'description' => 'Stores searches.',
+  /* $schema[visualscience_get_save_table_name()] = array(
+     'description' => 'Stores searches.',
+     'fields' => array(
+     'sid' => array(
+     'type' => 'serial',
+     'unsigned' => TRUE,
+     'not null' => TRUE,
+     'description' => 'Primary Key: Unique search ID.',
+     ),
+     'uid' => array(
+     'type' => 'int',
+     'unsigned' => TRUE,
+     'not null' => TRUE,
+     'description' => 'Secondary Key: User ID who has saved the search.',
+     ),
+     'name' => array(
+     'type' => 'varchar',
+     'length' => 55,
+     'default' => '',
+     'description' => 'Machine readable name of this search.',
+     ),
+     'search' => array(
+     'type' => 'varchar',
+     'length' => 1024,
+     'default' => '',
+     'description' => 'The text of this search.',
+     ),
+     ),
+     'primary key' => array('sid'),
+     'unique keys' => array('name' => array('name'))
+     );*/
+
+//Table to save the config of visualscience search tables
+  $schema['visualscience_search_config'] = array(
+    'description' => 'Stores VisualScience Configuration.',
     'fields' => array(
-      'sid' => array(
+      'cid' => array(
         'type' => 'serial',
         'unsigned' => TRUE,
         'not null' => TRUE,
-        'description' => 'Primary Key: Unique search ID.',
+        'description' => 'Primary Key: Unique Field ID.',
+      ),
+      'name' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'default' => '',
+        'description' => 'Machine readable name of the field.',
+      ),
+      'mini' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default'  => 0,
+        'size' => 'tiny',
+        'description' => 'Should this field be present in the mini table ? 1 or 0',
+      ),
+      'full' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default'  => 0,
+        'size' => 'tiny',
+        'description' => 'Should this field be present in the full table ? 1 or 0',
+      ),
+      'first' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default'  => 0,
+        'size' => 'tiny',
+        'description' => 'Is this the First Name field ? 1 or 0',
+      ),
+      'last' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default'  => 0,
+        'size' => 'tiny',
+        'description' => 'Is this the last name field ? 1 or 0',
+      ),
+      'field' => array(
+        'type' => 'int',
+        'unsigned' => TRUE,
+        'not null' => FALSE,
+        'default'  => 0,
+        'size' => 'tiny',
+        'description' => 'Is this field contained in field_config ? 1 or 0',
+      ),
+    ),
+    'primary key' => array('cid'),
+  );
+
+  //table for uploaded files and their permissions
+  $schema['visualscience_uploaded_files'] = array(
+    'description' => 'Uploaded Files and Permissions',
+    'fields' => array(
+      'fid' => array(
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE,
+        'description' => 'Primary Key: Unique file ID.',
       ),
       'uid' => array(
         'type' => 'int',
         'unsigned' => TRUE,
         'not null' => TRUE,
-        'description' => 'Secondary Key: User ID who has saved the search.',
+        'description' => 'User Id of the user who can access the file.',
       ),
-      'name' => array(
-        'type' => 'varchar',
-        'length' => 55,
-        'default' => '',
-        'description' => 'Machine readable name of this search.',
-      ),
-      'search' => array(
+      'email' => array(
         'type' => 'varchar',
         'length' => 1024,
         'default' => '',
-        'description' => 'The text of this search.',
+        'description' => 'The email of the user who can acces the file.',
+      ),
+      'name' => array(
+        'type' => 'varchar',
+        'length' => 1024,
+        'default' => '',
+        'description' => 'Name of the file, as uploaded by user',
+      ),
+      'url' => array(
+        'type' => 'varchar',
+        'length' => 4096,
+        'default' => '',
+        'description' => 'The url of the file in the private directory.(Common to each message)',
       ),
     ),
-    'primary key' => array('sid'),
-    'unique keys' => array('name' => array('name'))
-    );*/
+    'primary key' => array('fid')
+  );
 
-//Table to save the config of visualscience search tables
-$schema['visualscience_search_config'] = array(
-  'description' => 'Stores VisualScience Configuration.',
-  'fields' => array(
-    'cid' => array(
-      'type' => 'serial',
-      'unsigned' => TRUE,
-      'not null' => TRUE,
-      'description' => 'Primary Key: Unique Field ID.',
-      ),
-    'name' => array(
-      'type' => 'varchar',
-      'length' => 255,
-      'default' => '',
-      'description' => 'Machine readable name of the field.',
-      ),
-    'mini' => array(
-      'type' => 'int',
-      'unsigned' => TRUE,
-      'not null' => FALSE,
-      'default'  => 0,
-      'size' => 'tiny',
-      'description' => 'Should this field be present in the mini table ? 1 or 0',
-      ),
-    'full' => array(
-      'type' => 'int',
-      'unsigned' => TRUE,
-      'not null' => FALSE,
-      'default'  => 0,
-      'size' => 'tiny',
-      'description' => 'Should this field be present in the full table ? 1 or 0',
-      ),
-    'first' => array(
-      'type' => 'int',
-      'unsigned' => TRUE,
-      'not null' => FALSE,
-      'default'  => 0,
-      'size' => 'tiny',
-      'description' => 'Is this the First Name field ? 1 or 0',
-      ),
-    'last' => array(
-      'type' => 'int',
-      'unsigned' => TRUE,
-      'not null' => FALSE,
-      'default'  => 0,
-      'size' => 'tiny',
-      'description' => 'Is this the last name field ? 1 or 0',
-      ),
-    'field' => array(
-      'type' => 'int',
-      'unsigned' => TRUE,
-      'not null' => FALSE,
-      'default'  => 0,
-      'size' => 'tiny',
-      'description' => 'Is this field contained in field_config ? 1 or 0',
-      ),
-    ),
-'primary key' => array('cid'),
-);
-
-  //table for uploaded files and their permissions
-$schema['visualscience_uploaded_files'] = array(
- 'description' => 'Uploaded Files and Permissions',
- 'fields' => array(
-  'fid' => array(
-    'type' => 'serial',
-    'unsigned' => TRUE,
-    'not null' => TRUE,
-    'description' => 'Primary Key: Unique file ID.',
-    ),
-  'uid' => array(
-    'type' => 'int',
-    'unsigned' => TRUE,
-    'not null' => TRUE,
-    'description' => 'User Id of the user who can access the file.',
-    ),
-  'email' => array(
-    'type' => 'varchar',
-    'length' => 1024,
-    'default' => '',
-    'description' => 'The email of the user who can acces the file.',
-    ),
-  'name' => array(
-    'type' => 'varchar',
-    'length' => 1024,
-    'default' => '',
-    'description' => 'Name of the file, as uploaded by user',
-    ),
-  'url' => array(
-    'type' => 'varchar',
-    'length' => 4096,
-    'default' => '',
-    'description' => 'The url of the file in the private directory.(Common to each message)',
-    ),
-  ),
- 'primary key' => array('fid')
- );
-
-return $schema;
+  return $schema;
 }
 
 /**
@@ -154,7 +154,7 @@ return $schema;
  */
 function visualscience_uninstall() {
   drupal_uninstall_schema('visualscience');
-  //deleting the previously set persistent variables 
+  //deleting the previously set persistent variables
   variable_del('visualscience_user_sent_per_ajax_request');
   variable_del('visualscience_user_per_search_page');
 }

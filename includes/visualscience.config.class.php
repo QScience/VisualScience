@@ -6,8 +6,8 @@
 
 class Config {
   /**
-   * Initialisation procedure. 
-   * 
+   * Initialisation procedure.
+   *
    * Only adds the needed JS.
    */
   function __construct() {

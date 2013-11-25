@@ -2,14 +2,14 @@
 
 /**
  * @file
- * This file contains several helping functions that are used for the module 
+ * This file contains several helping functions that are used for the module
  * //Seb:
  * Check for the functions about how he gets the fields for the table.(visualscience_get_user_data())
  */
 
 /**
- * 
- * Helper function, returns which user data to search 
+ *
+ * Helper function, returns which user data to search
  * @return       data names wich are used for the search
  */
 function visualscience_get_user_data() {
@@ -17,8 +17,8 @@ function visualscience_get_user_data() {
 }
 
 /**
- * 
- * Helper function, returns which node data to search 
+ *
+ * Helper function, returns which node data to search
  * @return       data names wich are used for the search
  */
 function visualscience_get_node_data() {
@@ -26,16 +26,16 @@ function visualscience_get_node_data() {
 }
 
 /**
- * 
+ *
  * Returns the appropriate search data
- * @param string $table	the DB table wich data is searched. Possible values are "users" and "node"
+ * @param string $table the DB table wich data is searched. Possible values are "users" and "node"
  */
 function visualscience_get_data($table) {
   return $table=="users"?visualscience_get_user_data():($table=="node"?visualscience_get_node_data():FALSE);
 }
 
 /**
- * 
+ *
  * Redirects to visualscience page
  */
 function visualscience_redirect_to_visualscience() {

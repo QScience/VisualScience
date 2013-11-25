@@ -1,11 +1,11 @@
 <?php
 
 /**
-  * @file
-  * The Patterns implementation of the VisualScience Module.
-  *
-  * Automatically import pattern-formatted settings for VisualScience.
-  */
+ * @file
+ * The Patterns implementation of the VisualScience Module.
+ *
+ * Automatically import pattern-formatted settings for VisualScience.
+ */
 
 require_once drupal_get_path('module', 'visualscience') . '/includes/visualscience.searchtable.class.php';
 require_once drupal_get_path('module', 'visualscience') . '/includes/visualscience.config.class.php';
@@ -22,18 +22,18 @@ function visualscience_patterns($data = NULL)  {
     PATTERNS_MODIFY => array('visualscience_modify_config'),
     PATTERNS_EXPORT => array(
       PATTERNS_EXPORT_ALL => 'visualscience_export_config',
-      ),
-    );
+    ),
+  );
   $action['visualscience_config_numbers'] = array(
     PATTERNS_INFO   => t('Modify Configuration Numbers for VisualScience'),
     PATTERNS_CREATE => array('visualscience_insert_config_numbers'),
     PATTERNS_MODIFY => array('visualscience_modify_config_numbers'),
-    );
+  );
   $action['visualscience_config_actionbar'] = array(
     PATTERNS_INFO   => t('Modify Configuration Numbers for VisualScience'),
     PATTERNS_CREATE => array('visualscience_insert_config_actionbar'),
     PATTERNS_MODIFY => array('visualscience_modify_config_actionbar'),
-    );
+  );
 
   return $action;
 }
@@ -59,7 +59,7 @@ function visualscience_patterns_validate($action, $tag, &$data) {
   }
   elseif ($tag == 'visualscience_config_numbers') {
     //Checking for settings: nbUsersPerPage and nbUsersPerAjax.
-      //Syntax:
+    //Syntax:
     if (gettype($field['value']) != 'integer') {
       $status = PATTERNS_ERR;
       $msg = t('The field "' . $field['name'] . '" has a wrong value type.');
@@ -75,7 +75,7 @@ function visualscience_patterns_validate($action, $tag, &$data) {
   }
   elseif ($tag == 'visualscience_config_actionbar') {
     //Checking for settings: actionbar's buttons
-      //Syntax:
+    //Syntax:
     if (gettype($field['value']) != 'integer') {
       $status = PATTERNS_ERR;
       $msg = t('The field "' . $field['name'] . '" has a wrong value type.');
@@ -93,7 +93,7 @@ function visualscience_patterns_validate($action, $tag, &$data) {
   else {
     //Here we check for every field in the MySQL Table.
     if ($action == PATTERNS_CREATE) {
-    //Semantic Checking
+      //Semantic Checking
       if (!$config->fieldExistsInDB($field)) {
         $msg = '';
       }
@@ -101,10 +101,10 @@ function visualscience_patterns_validate($action, $tag, &$data) {
         $msg = t('The field already exists in the database.');
         $result[] = array(
           PATTERNS_WARNING_ELEMENT_UNDEFINED => t('The field "' . $field['name'] . '" already exists in the database.')
-          );
+        );
       }
 
-    //Syntax Checking:
+      //Syntax Checking:
       if (!$uncomplete_field) {
         if (!($wrong_value_type = $config->checkCorrectValueTypes($field))) {
           $msg = '';
@@ -128,7 +128,7 @@ function visualscience_patterns_validate($action, $tag, &$data) {
         $msg = t('The field "' . $field['name'] . '" does not already exist in the database.');
         $result[] = array(
           PATTERNS_WARNING_ELEMENT_UNDEFINED => t('The field ' . $field['name'] . ' does not already exist in the database.')
-          );
+        );
       }
 
       //Syntax Checking
@@ -284,7 +284,7 @@ function visualscience_export_config($args = NULL, &$result = NULL) {
       'full' => $field['full'],
       'first' => $field['first'],
       'last' => $field['last']
-      ));
+    ));
 
     array_push($actions, $action);
   }
@@ -294,14 +294,14 @@ function visualscience_export_config($args = NULL, &$result = NULL) {
     'tag' => 'visualscience_config_numbers',
     'name' => 'nbUsersPerPage',
     'value' => variable_get('visualscience_user_per_search_page')
-    ));
+  ));
   array_push($actions, $action);
 
   $action = array($action_type => array(
     'tag' => 'visualscience_config_numbers',
     'name' => 'nbUsersPerAjax',
     'value' => variable_get('visualscience_user_sent_per_ajax_request')
-    ));
+  ));
   array_push($actions, $action);
 
   /* Configuration ActionBar */
@@ -309,28 +309,28 @@ function visualscience_export_config($args = NULL, &$result = NULL) {
     'tag' => 'visualscience_config_actionbar',
     'name' => 'showMessagesButton',
     'value' => variable_get('visualscience_show_messages_button')
-    ));
+  ));
   array_push($actions, $action);
 
   $action = array($action_type => array(
     'tag' => 'visualscience_config_actionbar',
     'name' => 'showCSVButton',
     'value' => variable_get('visualscience_show_csv_button')
-    ));
+  ));
   array_push($actions, $action);
 
   $action = array($action_type => array(
     'tag' => 'visualscience_config_actionbar',
     'name' => 'showLivingScienceButton',
     'value' => variable_get('visualscience_show_livingscience_button')
-    ));
+  ));
   array_push($actions, $action);
 
   $action = array($action_type => array(
     'tag' => 'visualscience_config_actionbar',
     'name' => 'showConferenceButton',
     'value' => variable_get('visualscience_show_conference_button')
-    ));
+  ));
   array_push($actions, $action);
 
   return $actions;
