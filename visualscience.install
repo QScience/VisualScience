@@ -13,12 +13,10 @@ include_once 'includes/visualscience.utils.inc';
 
 /**
  * Implements hook_schema().
- * 
- * @return array  
- *   The created schema
  */
 function visualscience_schema() {
-  //table for saved searches  Seb: Keep it, just in case you need to save the searches.
+  // Table for saved searches.
+  // Seb: Keep it, just in case you need to save the searches.
   /* 
    * $schema[visualscience_get_save_table_name()] = array(
    *  'description' => 'Stores searches.',
@@ -53,7 +51,7 @@ function visualscience_schema() {
    *  );
    */
 
-// Table to save the config of visualscience search tables.
+  // Table to save the config of visualscience search tables.
   $schema['visualscience_search_config'] = array(
     'description' => 'Stores VisualScience Configuration.',
     'fields' => array(
@@ -148,7 +146,7 @@ function visualscience_schema() {
         'description' => 'The url of the file in the private directory.(Common to each message)',
       ),
     ),
-    'primary key' => array('fid')
+    'primary key' => array('fid'),
   );
 
   return $schema;
@@ -214,7 +212,6 @@ function visualscience_install() {
   $exist_last = field_info_field('last_name');
   $exist_first_field = field_info_field('field_first_name');
   $exist_last_field = field_info_field('field_last_name');
-
 
   if ((isset($exist_first) || isset($exist_first_field)) && (isset($exist_last) || isset($exist_last_field))) {
     drupal_write_record('visualscience_search_config', $first);
