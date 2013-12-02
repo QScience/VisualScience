@@ -156,10 +156,13 @@ function visualscience_schema() {
  * Implements hook_uninstall().
  */
 function visualscience_uninstall() {
-  drupal_uninstall_schema('visualscience');
   // Deleting the previously set persistent variables.
   variable_del('visualscience_user_sent_per_ajax_request');
   variable_del('visualscience_user_per_search_page');
+  variable_del('visualscience_show_csv_button');
+  variable_del('visualscience_show_messages_button');
+  variable_del('visualscience_show_livingscience_button');
+  variable_del('visualscience_show_conference_button');
 }
 
 /**
