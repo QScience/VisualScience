@@ -19,6 +19,7 @@ class VisualscienceUpload {
       '#type' => 'file',
       '#size' => 20,
       '#required' => FALSE,
+      '#prefix' => t('Uploading a file for your personal use. (Only available to you)'),
     );
 
     $form['submit'] = array(
