@@ -181,6 +181,7 @@ loadCLEditor: function (areaId) {
                     }
                 } else {
                     jQuery('#' + location + ' #edit-submit').hide();
+                    jQuery('#' + location + ' #visualscience-upload-text-description').hide();
                     jQuery('#' + location + ' #edit-visualscience-upload-file').attr({
                         'onChange': 'vsUtils.uploadSubmittedFiles(\'' + thisTabId + '\');',
                         'nbFiles': '0',
