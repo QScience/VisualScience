@@ -162,7 +162,7 @@ class VisualscienceSearch {
   }
 
   /**
-   * Returns the ui dof every user in db.
+   * Returns the uid of every user in db.
    * 
    * @return array
    *   Array of all uids.
@@ -197,6 +197,7 @@ class VisualscienceSearch {
 
   /**
    * Counts the number of users in the db.
+   * 
    * @return int 
    *   Number of users in db.
    */

@@ -52,8 +52,8 @@ function visualscience_patterns($data = NULL) {
  * @param array $data   
  *   Data of field to process.
  *   
- * @return page         
- *   Page showing wether the current data passed the test or not.
+ * @return array         
+ *   Array for page showing whether the current data passed the test or not.
  */
 function visualscience_patterns_validate($action, $tag, &$data) {
   $config = new VisualscienceConfig();
@@ -170,14 +170,6 @@ function visualscience_patterns_validate($action, $tag, &$data) {
 
 /**
  * Inserts the configuration fields into the db.
- * 
- * @param int $form_id    
- *   Id of the form (Drupal).
- * @param form $form_state 
- *   Drupal-generated.
- *   
- * @return none             
- *   Nothing returned.
  */
 function visualscience_insert_config($form_id, $form_state) {
   $config = new VisualscienceConfig();
@@ -195,14 +187,6 @@ function visualscience_insert_config($form_id, $form_state) {
 
 /**
  * Modifies a current configuration in the db.
- * 
- * @param int $form_id    
- *   Id of the form (Durpal).
- * @param form $form_state 
- *   Drupal-generated.
- *   
- * @return none             
- *   Nothing returned.
  */
 function visualscience_modify_config($form_id, $form_state) {
   $config = new VisualscienceConfig();
@@ -212,14 +196,6 @@ function visualscience_modify_config($form_id, $form_state) {
 
 /**
  * Sets value for number settings.
- * 
- * @param int $form_id    
- *   Id of the form.
- * @param form $form_state 
- *   Drupal-generated.
- *   
- * @return none             
- *   Nothing returned.
  */
 function visualscience_insert_config_numbers($form_id, $form_state) {
   $config = new VisualscienceConfig();
@@ -234,14 +210,6 @@ function visualscience_insert_config_numbers($form_id, $form_state) {
 
 /**
  * Modifies the numbers settings.
- * 
- * @param int $form_id    
- *   Id of the form.
- * @param form $form_state 
- *   Drupal-generated.
- *   
- * @return none             
- *   Nothing returned.
  */
 function visualscience_modify_config_numbers($form_id, $form_state) {
   $config = new VisualscienceConfig();
@@ -256,14 +224,6 @@ function visualscience_modify_config_numbers($form_id, $form_state) {
 
 /**
  * Insert configuration settings for the actionbar.
- * 
- * @param int $form_id    
- *   Id of form.
- * @param form $form_state 
- *   Drupal-generated.
- *   
- * @return none             
- *   Nothing returned.
  */
 function visualscience_insert_config_actionbar($form_id, $form_state) {
   $field = $form_state['values'];
@@ -283,14 +243,6 @@ function visualscience_insert_config_actionbar($form_id, $form_state) {
 
 /**
  * Modifies the configuration numbers for the actionbar.
- * 
- * @param int $form_id    
- *   Id of form.
- * @param form $form_state 
- *   Drupal-generated.
- * 
- * @return none             
- *   Nothing returned.
  */
 function visualscience_modify_config_actionbar($form_id, $form_state) {
   $field = $form_state['values'];
@@ -312,12 +264,12 @@ function visualscience_modify_config_actionbar($form_id, $form_state) {
  * Creates the content to export the current configuration.
  * 
  * @param array $args   
- *   Drupal-generated.
+ *   Patterns-generated.
  * @param object $result 
- *   Drupal-generated.
+ *   Patterns-generated.
  *   
  * @return array         
- *   Of all the actions patterns has to do to recreate the same configuration.
+ *   Array of all the actions to take to recreate the same configuration.
  */
 function visualscience_export_config($args = NULL, &$result = NULL) {
   $actions = array();

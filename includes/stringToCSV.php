@@ -7,7 +7,7 @@
 header('Content-type: text/csv');
 header('Content-Disposition: attachement;filename=livingscience_' . time() . '.csv');
 $new_line_character = urldecode($_GET['char']);
-// Fix for crappy IE bug in download.
+// Fix for IE bug in download.
 header('Pragma: ');
 header('Cache-Control: ');
 $text = urldecode($_GET['text']);

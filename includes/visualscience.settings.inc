@@ -11,7 +11,7 @@
 /**
  * Implements hook_help().
  * 
- * TODO: Write a user friendly help.
+ * TODO: Write a better more user friendly help.
  */
 function visualscience_help($path, $arg) {
   $output = '';

@@ -37,7 +37,7 @@ class VisualscienceConfig {
    * HTML Form for configuration's buttons.
    * 
    * @return string 
-   *   The HTML
+   *   The HTML form.
    */
   protected function getButtonSettingsHTML() {
     $csv = variable_get('visualscience_show_csv_button') ? 'checked' : '';
@@ -124,9 +124,6 @@ class VisualscienceConfig {
 
   /**
    * Deletes from the DB the registered previously shown fields.
-   * 
-   * @return none 
-   *   Nothing returned
    */
   protected function emptyOldValues() {
     $query = db_delete('visualscience_search_config');
@@ -148,9 +145,6 @@ class VisualscienceConfig {
    *   Is it the lastname field ?
    * @param int $field 
    *   Whether it is a custom field from the install or not
-   *   
-   * @return none         
-   *   Nothing returned
    */
   protected function insertIntoSearchConfig($name, $mini, $full, $first, $last, $field = 0) {
     $table = 'visualscience_search_config';
@@ -180,9 +174,6 @@ class VisualscienceConfig {
    *   Is it the astname field ?
    * @param int $field 
    *   Is it a custom field from the install or not ?
-   *   
-   * @return none         
-   *   Nothign returned
    */
   protected function updateSearchConfig($name, $mini, $full, $first, $last, $field = 0) {
     $table = 'visualscience_search_config';
@@ -228,9 +219,6 @@ class VisualscienceConfig {
 
   /**
    * Saves the number settings of the configuration page.
-   * 
-   * @return none 
-   *   Nothing returned
    */
   protected function saveNumbersSettings() {
     $nb_users_per_page = filter_xss(check_plain($_POST['nbUsersPerPage']));
@@ -245,9 +233,6 @@ class VisualscienceConfig {
 
   /**
    * Saves the visibility settings of actionbar's buttons.
-   * 
-   * @return none 
-   *   Nothing returned
    */
   protected function saveVisibilitySettings() {
     if (isset($_POST['vs_show_csv'])) {
@@ -278,9 +263,6 @@ class VisualscienceConfig {
 
   /**
    * Saves each field that has to be shown in the Database.
-   * 
-   * @return none 
-   *   Nothing returned
    */
   protected function saveFields() {
     $fields_list = $this->getListOfFields();
@@ -328,9 +310,6 @@ class VisualscienceConfig {
 
   /**
    * Registers a submit configuration form.
-   * 
-   * @return none 
-   *   Nothing returned
    */
   public function saveSentValues() {
     $this->emptyOldValues();
@@ -345,9 +324,6 @@ class VisualscienceConfig {
    * 
    * @param array $field 
    *   The field to be inserted into the DB
-   *   
-   * @return none        
-   *   Nothing
    */
   public function insertPatternConfig($field) {
     $this->insertIntoSearchConfig($field['name'], $field['mini'], $field['full'], $field['first'], $field['last']);
@@ -358,9 +334,6 @@ class VisualscienceConfig {
    * 
    * @param array $field 
    *   Field to be updated
-   *   
-   * @return none        
-   *   Nothing returned
    */
   public function modifyPatternConfig($field) {
     $this->updateSearchConfig($field['name'], $field['mini'], $field['full'], $field['first'], $field['last']);
@@ -371,9 +344,6 @@ class VisualscienceConfig {
    * 
    * @param int $value 
    *   Number of user shown
-   *   
-   * @return none        
-   *   Nothing returned
    */
   public function updateNbUsersPerPage($value) {
     variable_set('visualscience_user_per_search_page', intval($value));
@@ -384,9 +354,6 @@ class VisualscienceConfig {
    * 
    * @param int $value 
    *   The number of users to send
-   *   
-   * @return none        
-   *   Nothing returned
    */
   public function updateNbUsersPerAjax($value) {
     variable_set('visualscience_user_sent_per_ajax_request', intval($value));
@@ -396,9 +363,9 @@ class VisualscienceConfig {
    * Checks wether a field has everything needed to be inserted in the DB.
    * 
    * @param array $field 
-   *   Field to be checkd
+   *   Field to be checked
    *   
-   * @return mix        
+   * @return int|bool        
    *   False if there was no error, else the missing field's entry
    */
   public function checkCompleteField($field) {
@@ -449,7 +416,7 @@ class VisualscienceConfig {
    * @param array $field 
    *   Field whose values have to be checked
    *   
-   * @return mix        
+   * @return int|bool       
    *   False if everything is correct else the name of the faulty field's entry
    */
   public function checkCorrectValueTypes($field) {

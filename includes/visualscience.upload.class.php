@@ -10,11 +10,6 @@ class VisualscienceUpload {
    * Creates the form to upload files to the server.
    * 
    * Page callback: Upload form
-   *
-   * @param form $form       
-   *   Drupal
-   * @param form $form_state 
-   *   Drupal
    * 
    * @return array             
    *   Array used to generate the form
@@ -37,8 +32,6 @@ class VisualscienceUpload {
 
   /**
    * Allows the download of a file to an authenticated and legitime user.
-   * @return none 
-   *   Nothing
    */
   public function visualscienceGetFileWithId() {
     $file_id = floatval($_GET['id']);
@@ -82,14 +75,6 @@ class VisualscienceUpload {
    * Submits upload callback, register (db and server) file if needed.
    * 
    * TODO: Handle multiple uploads(Hint:Look for MultiUpload File Widget).
-   * 
-   * @param form $form       
-   *   Drupal-generated
-   * @param form $form_state 
-   *   Drupal-generated
-   * 
-   * @return none             
-   *   Nothing returned
    */
   public function visualscienceUploadSubmit($form, &$form_state) {
     $dir = 'private://';
@@ -113,7 +98,7 @@ class VisualscienceUpload {
         $id = $result->fid;
         $vs_url = drupal_get_path('module', 'visualscience');
         if (strpos($vs_url, '?')) {
-          // Handling the clean url problem.
+          // Handling clean url.
           drupal_set_message(t('The file has been uploaded to: @url', array('@url' => $base_url . '/visualscience/file&id=' . $id)));
         }
         else {
